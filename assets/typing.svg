@@ -36,8 +36,7 @@
 </defs>
   <rect width="620" height="60" fill="none"/>
   <mask id="mask0">
-    <rect x="310" y="0" width="0" height="60" fill="white">
-      <animate attributeName="x" dur="19.04s" begin="0s" repeatCount="indefinite" values="310.0;310.0;140.7;140.7;310.0;310.0" keyTimes="0.000000;0.000000;0.088235;0.167017;0.222164;1.000000"/>
+    <rect x="140.7" y="0" width="0" height="60" fill="white">
       <animate attributeName="width" dur="19.04s" begin="0s" repeatCount="indefinite" values="0.0;0.0;338.5;338.5;0.0;0.0" keyTimes="0.000000;0.000000;0.088235;0.167017;0.222164;1.000000"/>
     </rect>
   </mask>
@@ -46,8 +45,7 @@
     <animate attributeName="opacity" dur="19.04s" begin="0s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0.000000;0.000000;0.000525;0.221639;0.222164;1.000000"/>
   </text>
   <mask id="mask1">
-    <rect x="310" y="0" width="0" height="60" fill="white">
-      <animate attributeName="x" dur="19.04s" begin="0s" repeatCount="indefinite" values="310.0;310.0;140.7;140.7;310.0;310.0" keyTimes="0.000000;0.243172;0.331408;0.410189;0.465336;1.000000"/>
+    <rect x="140.7" y="0" width="0" height="60" fill="white">
       <animate attributeName="width" dur="19.04s" begin="0s" repeatCount="indefinite" values="0.0;0.0;338.5;338.5;0.0;0.0" keyTimes="0.000000;0.243172;0.331408;0.410189;0.465336;1.000000"/>
     </rect>
   </mask>
@@ -56,8 +54,7 @@
     <animate attributeName="opacity" dur="19.04s" begin="0s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0.000000;0.243172;0.243697;0.464811;0.465336;1.000000"/>
   </text>
   <mask id="mask2">
-    <rect x="310" y="0" width="0" height="60" fill="white">
-      <animate attributeName="x" dur="19.04s" begin="0s" repeatCount="indefinite" values="310.0;310.0;148.8;148.8;310.0;310.0" keyTimes="0.000000;0.486345;0.570378;0.649160;0.701681;1.000000"/>
+    <rect x="148.8" y="0" width="0" height="60" fill="white">
       <animate attributeName="width" dur="19.04s" begin="0s" repeatCount="indefinite" values="0.0;0.0;322.4;322.4;0.0;0.0" keyTimes="0.000000;0.486345;0.570378;0.649160;0.701681;1.000000"/>
     </rect>
   </mask>
@@ -66,8 +63,7 @@
     <animate attributeName="opacity" dur="19.04s" begin="0s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0.000000;0.486345;0.486870;0.701155;0.701681;1.000000"/>
   </text>
   <mask id="mask3">
-    <rect x="310" y="0" width="0" height="60" fill="white">
-      <animate attributeName="x" dur="19.04s" begin="0s" repeatCount="indefinite" values="310.0;310.0;100.4;100.4;310.0;310.0" keyTimes="0.000000;0.722689;0.831933;0.910714;0.978992;1.000000"/>
+    <rect x="100.4" y="0" width="0" height="60" fill="white">
       <animate attributeName="width" dur="19.04s" begin="0s" repeatCount="indefinite" values="0.0;0.0;419.1;419.1;0.0;0.0" keyTimes="0.000000;0.722689;0.831933;0.910714;0.978992;1.000000"/>
     </rect>
   </mask>
@@ -76,7 +72,7 @@
     <animate attributeName="opacity" dur="19.04s" begin="0s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0.000000;0.722689;0.723214;0.978466;0.978992;1.000000"/>
   </text>
   <rect x="310" y="16" width="3" height="26" fill="#00d4ff" rx="1">
-    <animate attributeName="x" dur="19.04s" begin="0s" repeatCount="indefinite" values="310.0;140.7;479.3;479.3;140.7;310.0;140.7;479.3;479.3;140.7;310.0;148.8;471.2;471.2;148.8;310.0;100.4;519.6;519.6;100.4;310.0;310.0" keyTimes="0.000000;0.000000;0.088235;0.167017;0.222164;0.243172;0.243172;0.331408;0.410189;0.465336;0.486345;0.486345;0.570378;0.649160;0.701681;0.722689;0.722689;0.831933;0.910714;0.978992;1.000000;1.000000"/>
+    <animate attributeName="x" dur="19.04s" begin="0s" repeatCount="indefinite" values="310.0;140.7;479.3;479.3;140.7;140.7;140.7;479.3;479.3;140.7;140.7;148.8;471.2;471.2;148.8;148.8;100.4;519.6;519.6;100.4;100.4;310.0" keyTimes="0.000000;0.000000;0.088235;0.167017;0.222164;0.243172;0.243172;0.331408;0.410189;0.465336;0.486345;0.486345;0.570378;0.649160;0.701681;0.722689;0.722689;0.831933;0.910714;0.978992;1.000000;1.000000"/>
     <animate attributeName="opacity" dur="0.8s" repeatCount="indefinite" values="1;1;0;0;1" keyTimes="0;0.45;0.5;0.95;1"/>
   </rect>
 </svg>

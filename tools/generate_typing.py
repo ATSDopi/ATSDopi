@@ -1,7 +1,9 @@
 """
 Generate an animated typing SVG using SMIL.
 Single global timeline — all phrases share the same dur and begin.
-Text is CENTERED horizontally. No overlapping, no drift.
+Text is CENTERED (text-anchor="middle") but types LEFT → RIGHT.
+The mask reveals characters from the left edge of each phrase to the right.
+Cursor follows the right edge of the currently revealed text.
 """
 
 import sys
@@ -26,10 +28,8 @@ def _text_width(text, font_size=FONT_SIZE):
 def generate_typing(phrases, output_path):
     """
     Generate a CENTERED typing animation with a single global timeline.
-    Each phrase: types in → holds → erases → pause before next.
-    The mask grows from the CENTER outward so text appears centered.
+    Each phrase: types in (L→R) → holds → erases (R→L) → pause → next.
     """
-    # Calculate timing for each phrase
     phrase_timings = []
     current_time = 0.0
 
@@ -40,9 +40,15 @@ def generate_typing(phrases, output_path):
         erase_dur = max(len(phrase) * 0.05, 0.3)
         pause_dur = 0.4
 
+        # Left edge of the centered text
+        left_x = CENTER_X - tw / 2
+        right_x = CENTER_X + tw / 2
+
         phrase_timings.append({
             "text": phrase,
             "width": tw,
+            "left_x": left_x,
+            "right_x": right_x,
             "start": current_time,
             "type_end": current_time + type_dur,
             "hold_end": current_time + type_dur + hold_dur,
@@ -58,45 +64,40 @@ def generate_typing(phrases, output_path):
 
     for i, pt in enumerate(phrase_timings):
         tw = pt["width"]
+        left_x = pt["left_x"]
         s = pt["start"]
         te = pt["type_end"]
         he = pt["hold_end"]
         ee = pt["erase_end"]
 
-        # Centered mask: rect grows from center outward
-        # x starts at CENTER_X (width=0) and moves left as width grows
-        # x = CENTER_X - width/2, width = current_width
+        # ── Mask: reveals text from left to right ──
+        # x stays at left_x, width grows from 0 → tw (typing), then tw → 0 (erasing)
         mask_id = f"mask{i}"
         svg += f'  <mask id="{mask_id}">\n'
-        svg += f'    <rect x="{CENTER_X}" y="0" width="0" height="{HEIGHT}" fill="white">\n'
+        svg += f'    <rect x="{left_x:.1f}" y="0" width="0" height="{HEIGHT}" fill="white">\n'
 
         mask_values = []
         mask_keytimes = []
 
         def add_point(t, w):
-            # x = CENTER_X - w/2, width = w
-            mask_values.append(f"{CENTER_X - w / 2:.1f};{w:.1f}")
+            mask_values.append(f"{w:.1f}")
             mask_keytimes.append(f"{t / total_dur:.6f}")
 
         add_point(0, 0)
         add_point(s, 0)
-        add_point(te, tw)
-        add_point(he, tw)
-        add_point(ee, 0)
+        add_point(te, tw)      # fully typed
+        add_point(he, tw)      # still full during hold
+        add_point(ee, 0)       # erased
         add_point(total_dur, 0)
 
-        svg += f'      <animate attributeName="x" dur="{total_dur:.2f}s" '
-        svg += f'begin="0s" repeatCount="indefinite" '
-        svg += f'values="{";".join(v.split(";")[0] for v in mask_values)}" '
-        svg += f'keyTimes="{";".join(mask_keytimes)}"/>\n'
         svg += f'      <animate attributeName="width" dur="{total_dur:.2f}s" '
         svg += f'begin="0s" repeatCount="indefinite" '
-        svg += f'values="{";".join(v.split(";")[1] for v in mask_values)}" '
+        svg += f'values="{";".join(mask_values)}" '
         svg += f'keyTimes="{";".join(mask_keytimes)}"/>\n'
         svg += f'    </rect>\n'
         svg += f'  </mask>\n'
 
-        # Text element — CENTERED with text-anchor="middle"
+        # ── Text: centered, masked ──
         svg += f'  <text x="{CENTER_X}" y="{Y_TEXT}" font-size="{FONT_SIZE}" '
         svg += f'font-family="{FONT_FAMILY}" font-weight="600" fill="{PURPLE}" '
         svg += f'text-anchor="middle" mask="url(#{mask_id})" opacity="0">\n'
@@ -123,7 +124,10 @@ def generate_typing(phrases, output_path):
         svg += f'keyTimes="{";".join(op_keytimes)}"/>\n'
         svg += f'  </text>\n'
 
-    # ─── Blinking cursor — centered ───
+    # ─── Cursor: follows the right edge of revealed text ───
+    # During typing: cursor goes from left_x to right_x
+    # During hold: cursor stays at right_x
+    # During erasing: cursor goes from right_x back to left_x
     cursor_values = []
     cursor_keytimes = []
 
@@ -134,12 +138,16 @@ def generate_typing(phrases, output_path):
     add_cursor(0, CENTER_X)
 
     for pt in phrase_timings:
-        # Cursor starts at center, moves right as text types
-        add_cursor(pt["start"], CENTER_X - pt["width"] / 2)
-        add_cursor(pt["type_end"], CENTER_X + pt["width"] / 2)
-        add_cursor(pt["hold_end"], CENTER_X + pt["width"] / 2)
-        add_cursor(pt["erase_end"], CENTER_X - pt["width"] / 2)
-        add_cursor(pt["end"], CENTER_X)
+        # At start of phrase: cursor at left edge
+        add_cursor(pt["start"], pt["left_x"])
+        # After typing: cursor at right edge
+        add_cursor(pt["type_end"], pt["right_x"])
+        # During hold: stays at right edge
+        add_cursor(pt["hold_end"], pt["right_x"])
+        # After erasing: back to left edge
+        add_cursor(pt["erase_end"], pt["left_x"])
+        # End of pause: at left edge (will jump to next phrase's left edge)
+        add_cursor(pt["end"], pt["left_x"])
 
     add_cursor(total_dur, CENTER_X)
 
@@ -152,6 +160,7 @@ def generate_typing(phrases, output_path):
     svg += f'begin="0s" repeatCount="indefinite" '
     svg += f'values="{";".join(cursor_values)}" '
     svg += f'keyTimes="{";".join(cursor_keytimes)}"/>\n'
+    # Blink
     svg += f'    <animate attributeName="opacity" dur="0.8s" '
     svg += f'repeatCount="indefinite" values="1;1;0;0;1" '
     svg += f'keyTimes="0;0.45;0.5;0.95;1"/>\n'
@@ -161,7 +170,7 @@ def generate_typing(phrases, output_path):
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"  ✓ Typing animation ({len(phrases)} phrases, {total_dur:.1f}s loop, centered) → {output_path}")
+    print(f"  ✓ Typing animation ({len(phrases)} phrases, {total_dur:.1f}s loop, centered L→R) → {output_path}")
 
 
 if __name__ == "__main__":

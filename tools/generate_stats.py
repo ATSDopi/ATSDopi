@@ -67,8 +67,8 @@ def _stat_row(svg, x, y, icon_svg, label, value, w):
     svg += f'  <g transform="translate({x}, {y})">\n'
     svg += f'    <svg width="24" height="24" viewBox="0 0 24 24">{icon_svg}</svg>\n'
     svg += text_el(32, 17, label, font_size=13, fill=TEXT_DIM)
-    # Right-align all values at the same x position
-    svg += text_el(w - 25, 17, value, font_size=14, fill=TEXT, weight="bold", anchor="end")
+    # Right-align all values at the same x position (with padding from border)
+    svg += text_el(w - 45, 17, value, font_size=14, fill=TEXT, weight="bold", anchor="end")
     svg += '  </g>\n'
     return svg
 
@@ -144,8 +144,8 @@ def generate_top_langs(stats, output_path):
         svg += f'  <circle cx="26" cy="{y - 4}" r="5" fill="{color}"/>\n'
         # Language name
         svg += text_el(38, y, lang, font_size=13, fill=TEXT)
-        # Percentage — right-aligned
-        svg += text_el(LANGS_W - 25, y, f"{pct:.1f}%",
+        # Percentage — right-aligned with padding
+        svg += text_el(LANGS_W - 45, y, f"{pct:.1f}%",
                        font_size=13, fill=TEXT, weight="bold", anchor="end")
         y += 22
 

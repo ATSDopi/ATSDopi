@@ -16,7 +16,7 @@ from generate_trophies import generate_trophies
 from generate_activity import generate_activity_graph
 from generate_skills import generate_skills
 from generate_badges import generate_badges
-from generate_snake import generate_snake
+from generate_pacman import generate_pacman
 from generate_socials import generate_all_socials
 from github_client import compute_stats
 
@@ -79,8 +79,8 @@ def main():
     print("[9/10] Activity graph...")
     generate_activity_graph(username, os.path.join(assets, "activity-graph.svg"))
 
-    print("[10/10] Snake animation...")
-    generate_snake(username, os.path.join(assets, "snake.svg"))
+    print("[10/10] Pac-Man animation...")
+    generate_pacman(username, os.path.join(assets, "snake.svg"))
 
     print(f"\n{'='*60}")
     print(f"  ✅ All assets generated in /assets/")
