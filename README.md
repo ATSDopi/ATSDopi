@@ -127,7 +127,14 @@ class ATSDopi:
 > 🌐 **Central hub**: [guns.lol/atsdopi](https://guns.lol/atsdopi) — all my links in one place
 
 <div align="center">
-  <img src="./assets/socials.svg" alt="socials" />
+  <a href="https://guns.lol/atsdopi"><img src="./assets/social-guns.svg" height="56" alt="guns.lol" /></a>
+  <a href="https://discord.com/users/704717426729943070"><img src="./assets/social-discord.svg" height="56" alt="Discord" /></a>
+  <a href="https://instagram.com/0._ats_.0"><img src="./assets/social-instagram.svg" height="56" alt="Instagram" /></a>
+  <a href="https://www.frostapp.net/"><img src="./assets/social-frost.svg" height="56" alt="Frost" /></a>
+  <a href="https://www.atspro.fr/"><img src="./assets/social-atspro.svg" height="56" alt="ATS Pro" /></a>
+  <a href="mailto:atsprofessional67@gmail.com"><img src="./assets/social-email.svg" height="56" alt="Email" /></a>
+  <a href="https://www.potiongang.fr/"><img src="./assets/social-potion.svg" height="56" alt="Potion Gang" /></a>
+  <a href="https://buymeacoffee.com/ats_dopi"><img src="./assets/social-buymeacoffee.svg" height="56" alt="Buy Me a Coffee" /></a>
 </div>
 
 <br/>

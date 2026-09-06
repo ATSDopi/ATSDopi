@@ -17,7 +17,7 @@ from generate_activity import generate_activity_graph
 from generate_skills import generate_skills
 from generate_badges import generate_badges
 from generate_snake import generate_snake
-from generate_socials import generate_socials, SOCIALS
+from generate_socials import generate_all_socials
 from github_client import compute_stats
 
 
@@ -59,8 +59,8 @@ def main():
         ("Role", "Student", "#7287fd"),
     ], os.path.join(assets, "badges.svg"))
 
-    print("[5/10] Social links...")
-    generate_socials(SOCIALS, os.path.join(assets, "socials.svg"))
+    print("[5/10] Social badges (individual)...")
+    generate_all_socials(assets)
 
     # ─── API-dependent assets ───
     print("\n  Fetching GitHub data (this may take a few seconds)...")
