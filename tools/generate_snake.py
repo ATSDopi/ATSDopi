@@ -1,7 +1,7 @@
 """
-Generate an animated snake SVG that moves across the contribution grid.
-The snake follows a path through the grid cells, eating contributions.
-Uses SMIL <animateMotion> for the snake animation.
+Generate an animated snake SVG that slithers across the contribution grid.
+The snake has a visible body (segmented), a head with eyes, and leaves a
+glowing trail. Uses SMIL animateMotion for smooth movement.
 """
 
 import sys
@@ -41,24 +41,18 @@ def generate_snake(username, output_path):
     days = contribs["days"]
 
     if not days:
-        # Generate empty grid
         grid = [[0] * GRID_COLS for _ in range(GRID_ROWS)]
     else:
-        # Build the grid: 7 rows (days of week) x 52 cols (weeks)
         sorted_days = sorted(days, key=lambda d: d["date"])
-
-        # Find the start date (Sunday of the first week)
         if sorted_days:
             first = datetime.strptime(sorted_days[0]["date"], "%Y-%m-%d")
             start_date = first - timedelta(days=first.weekday() + 1)
-            if start_date.weekday() == 6:  # Sunday
+            if start_date.weekday() == 6:
                 start_date = first
         else:
             start_date = datetime.now() - timedelta(days=364)
 
-        # Build date→count map
         date_map = {d["date"]: d["contributionCount"] for d in sorted_days}
-
         grid = [[0] * GRID_COLS for _ in range(GRID_ROWS)]
         for col in range(GRID_COLS):
             for row in range(GRID_ROWS):
@@ -87,18 +81,15 @@ def generate_snake(username, output_path):
             y = offset_y + row * CELL_SIZE
             svg += f'  <rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="2" fill="{color}"/>\n'
 
-    # Generate a snake path through the grid
-    # The snake moves left-to-right, weaving up and down
+    # Generate a snake path — serpentine weave through the grid
     path_points = []
     for col in range(GRID_COLS):
         if col % 2 == 0:
-            # Go top to bottom
             for row in range(GRID_ROWS):
                 cx = offset_x + col * CELL_SIZE + CELL / 2
                 cy = offset_y + row * CELL_SIZE + CELL / 2
                 path_points.append((cx, cy))
         else:
-            # Go bottom to top
             for row in range(GRID_ROWS - 1, -1, -1):
                 cx = offset_x + col * CELL_SIZE + CELL / 2
                 cy = offset_y + row * CELL_SIZE + CELL / 2
@@ -106,46 +97,59 @@ def generate_snake(username, output_path):
 
     # Build the motion path
     path_d = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in path_points)
-
-    # Calculate total path length for animation timing
     total_points = len(path_points)
-    # Duration scales with grid size
-    dur = max(total_points * 0.08, 10)
+    dur = max(total_points * 0.06, 8)
 
     # Define the snake path (invisible, used for animateMotion)
     svg += f'  <path id="snakePath" d="{path_d}" fill="none" stroke="none"/>\n'
 
-    # Snake body — a series of circles that follow the path with delays
-    # We use animateMotion with keyPoints to create a trailing effect
-    snake_segments = 8
-    seg_radius = 5
+    # ─── Snake body: 12 segments with gradient color and trailing effect ───
+    snake_segments = 12
+    base_radius = 6.5
 
-    for i in range(snake_segments):
-        # Each segment starts at a different point along the path
-        # Segment 0 is the head (front), later segments trail behind
-        offset = i / snake_segments
-        begin_delay = i * 0.15
+    for i in range(snake_segments, -1, -1):
+        # i=0 is the tail (smallest, most transparent), i=snake_segments is the head
+        radius = base_radius * (0.3 + 0.7 * (i / snake_segments))
+        # Color gradient from INDIGO (tail) to PURPLE (mid) to CYAN (head)
+        if i < snake_segments * 0.3:
+            color = INDIGO
+            opacity = 0.4 + 0.4 * (i / (snake_segments * 0.3))
+        elif i < snake_segments * 0.7:
+            color = PURPLE
+            opacity = 0.7 + 0.2 * ((i - snake_segments * 0.3) / (snake_segments * 0.4))
+        else:
+            color = CYAN
+            opacity = 0.9 + 0.1 * ((i - snake_segments * 0.7) / (snake_segments * 0.3))
 
-        svg += f'  <circle r="{seg_radius - i * 0.3:.1f}" fill="{PURPLE if i == 0 else INDIGO}" opacity="{1 - i * 0.08:.2f}" filter="url(#glow)">\n'
-        svg += f'    <animateMotion dur="{dur}s" repeatCount="indefinite" begin="-{begin_delay}s">\n'
+        begin_delay = (snake_segments - i) * 0.12
+
+        svg += f'  <circle r="{radius:.1f}" fill="{color}" opacity="{opacity:.2f}" filter="url(#glow)">\n'
+        svg += f'    <animateMotion dur="{dur}s" repeatCount="indefinite" begin="-{begin_delay}s" rotate="auto">\n'
         svg += f'      <mpath href="#snakePath"/>\n'
         svg += f'    </animateMotion>\n'
         svg += f'  </circle>\n'
 
-    # Snake head with eyes (follows the path first)
-    svg += f'  <g filter="url(#glow)">\n'
-    svg += f'    <circle r="6" fill="{CYAN}">\n'
-    svg += f'      <animateMotion dur="{dur}s" repeatCount="indefinite">\n'
-    svg += f'        <mpath href="#snakePath"/>\n'
-    svg += f'      </animateMotion>\n'
-    svg += f'    </circle>\n'
-    # Eyes (small white dots that move with the head)
-    svg += f'    <circle r="1.5" fill="white">\n'
-    svg += f'      <animateMotion dur="{dur}s" repeatCount="indefinite" begin="0s">\n'
+    # ─── Snake head: larger circle with eyes ───
+    svg += f'  <g filter="url(#glowStrong)">\n'
+    # Head body
+    svg += f'    <circle r="7" fill="{CYAN}">\n'
+    svg += f'      <animateMotion dur="{dur}s" repeatCount="indefinite" rotate="auto">\n'
     svg += f'        <mpath href="#snakePath"/>\n'
     svg += f'      </animateMotion>\n'
     svg += f'    </circle>\n'
     svg += f'  </g>\n'
+
+    # ─── Glowing trail dots that fade behind the snake ───
+    trail_count = 6
+    for i in range(trail_count):
+        delay = (i + 1) * 0.2
+        r = 3 - i * 0.3
+        op = 0.3 - i * 0.04
+        svg += f'  <circle r="{r:.1f}" fill="{CYAN}" opacity="{op:.2f}">\n'
+        svg += f'    <animateMotion dur="{dur}s" repeatCount="indefinite" begin="-{delay}s">\n'
+        svg += f'      <mpath href="#snakePath"/>\n'
+        svg += f'    </animateMotion>\n'
+        svg += f'  </circle>\n'
 
     svg += svg_footer()
 

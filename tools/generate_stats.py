@@ -63,11 +63,12 @@ def _icon_followers():
 
 
 def _stat_row(svg, x, y, icon_svg, label, value, w):
-    """Add a stat row with icon, label, and value."""
+    """Add a stat row with icon, label, and value. Numbers right-aligned."""
     svg += f'  <g transform="translate({x}, {y})">\n'
     svg += f'    <svg width="24" height="24" viewBox="0 0 24 24">{icon_svg}</svg>\n'
     svg += text_el(32, 17, label, font_size=13, fill=TEXT_DIM)
-    svg += text_el(w - 20, 17, value, font_size=14, fill=TEXT, weight="bold", anchor="end")
+    # Right-align all values at the same x position
+    svg += text_el(w - 25, 17, value, font_size=14, fill=TEXT, weight="bold", anchor="end")
     svg += '  </g>\n'
     return svg
 
@@ -134,7 +135,7 @@ def generate_top_langs(stats, output_path):
         svg += f'  <rect x="{offset:.1f}" y="{bar_y}" width="{w:.1f}" height="{bar_h}" rx="2" fill="{color}"/>\n'
         offset += w
 
-    # Language list with percentages
+    # Language list with percentages — aligned
     y = 85
     for lang, count in top:
         color = LANG_COLORS.get(lang, INDIGO)
@@ -143,9 +144,9 @@ def generate_top_langs(stats, output_path):
         svg += f'  <circle cx="26" cy="{y - 4}" r="5" fill="{color}"/>\n'
         # Language name
         svg += text_el(38, y, lang, font_size=13, fill=TEXT)
-        # Percentage
-        svg += text_el(LANGS_W - 20, y, f"{pct:.1f}%",
-                       font_size=13, fill=TEXT_DIM, anchor="end")
+        # Percentage — right-aligned
+        svg += text_el(LANGS_W - 25, y, f"{pct:.1f}%",
+                       font_size=13, fill=TEXT, weight="bold", anchor="end")
         y += 22
 
     svg += svg_footer()

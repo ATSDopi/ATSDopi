@@ -1,65 +1,91 @@
 """
-Generate a social links SVG card with icons for each platform.
-All icons are hand-drawn SVG — no external icon libraries.
+Generate a social links SVG card with REAL brand icons.
+Icons fetched from simpleicons.org (stored in social_icons.json).
+Custom platforms (guns.lol, Frost, ATS Pro, Potion) use styled text fallbacks.
 """
 
 import sys
 import os
+import json
 
 sys.path.insert(0, os.path.dirname(__file__))
 from svg_utils import svg_header, svg_footer, CARD_BG, BORDER, TEXT, TEXT_DIM, PURPLE, CYAN, INDIGO
 
-BADGE_W = 48
-BADGE_H = 48
+BADGE_W = 56
+BADGE_H = 56
 GAP = 10
 
-# Social platform definitions: (name, color, icon_svg, url)
+# Load real social icons
+_ICONS_FILE = os.path.join(os.path.dirname(__file__), "social_icons.json")
+with open(_ICONS_FILE, "r", encoding="utf-8") as f:
+    SOCIAL_ICON_DATA = json.load(f)
+
+# Social platform definitions: (display_name, color, url)
+# For simpleicons-backed ones, the real logo path is in SOCIAL_ICON_DATA
+# For custom ones, we use a styled text/initial fallback
 SOCIALS = [
-    ("guns.lol", "#a333d8",
-     '<circle cx="12" cy="12" r="9" fill="none" stroke="#a333d8" stroke-width="1.5"/><path d="M8 10l4 4 4-4" stroke="#a333d8" stroke-width="2" fill="none"/><circle cx="12" cy="7" r="1.5" fill="#a333d8"/>',
-     "https://guns.lol/atsdopi"),
-
-    ("Discord", "#5865f2",
-     '<path d="M19 5c-2-1-4-1.5-6-1.5S9 4 7 5c-1 3-1.5 6-1.5 9c1.5 1 3 1.5 4.5 2l1-2c-0.5-0.2-1-0.5-1.5-0.8c0.2-0.1 0.3-0.2 0.5-0.3c2 1 4 1 6 0c0.2 0.1 0.3 0.2 0.5 0.3c-0.5 0.3-1 0.6-1.5 0.8l1 2c1.5-0.5 3-1 4.5-2c0-3-0.5-6-1.5-9z" fill="#5865f2"/><circle cx="9.5" cy="11" r="1.2" fill="white"/><circle cx="14.5" cy="11" r="1.2" fill="white"/>',
-     "https://discord.com/users/704717426729943070"),
-
-    ("Instagram", "#e1306c",
-     '<rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="#e1306c" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="#e1306c" stroke-width="1.5"/><circle cx="17" cy="7" r="1.2" fill="#e1306c"/>',
-     "https://instagram.com/0._ats_.0"),
-
-    ("Frost", "#00b4d8",
-     '<path d="M12 2l-3 6h2v4l-4 2 4 2v4h-2l3 6 3-6h-2v-4l4-2-4-2V8h2z" fill="#00b4d8"/>',
-     "https://www.frostapp.net/"),
-
-    ("ATS Pro", "#7287fd",
-     '<rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#7287fd" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="#7287fd" font-family="monospace">ATS</text>',
-     "https://www.atspro.fr/"),
-
-    ("Email", "#ea4335",
-     '<rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="#ea4335" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="#ea4335" stroke-width="1.5" fill="none"/>',
-     "mailto:atsprofessional67@gmail.com"),
-
-    ("Potion", "#9b59b6",
-     '<path d="M9 3h6v3l-2 4v8c0 2-1 3-3 3s-3-1-3-3v-8L9 6z" fill="none" stroke="#9b59b6" stroke-width="1.5"/><path d="M9 10h6" stroke="#9b59b6" stroke-width="1"/>',
-     "https://www.potiongang.fr/"),
-
-    ("Buy Me Coffee", "#ffdd00",
-     '<path d="M6 8h12l-1 10c-.2 1.5-1.5 2.5-3 2.5H10c-1.5 0-2.8-1-3-2.5z" fill="none" stroke="#ffdd00" stroke-width="1.5"/><path d="M6 8h12v-2H6z" fill="#ffdd00" opacity="0.3"/><path d="M18 10h2c1 0 2 1 2 2s-1 2-2 2h-2" stroke="#ffdd00" stroke-width="1.5" fill="none"/>',
-     "https://buymeacoffee.com/ats_dopi"),
+    ("guns.lol",       "#a333d8", "https://guns.lol/atsdopi",       "custom"),
+    ("Discord",        "#5865f2", "https://discord.com/users/704717426729943070", "simpleicons"),
+    ("Instagram",      "#e4405f", "https://instagram.com/0._ats_.0", "simpleicons"),
+    ("Frost",          "#00b4d8", "https://www.frostapp.net/",       "custom"),
+    ("ATS Pro",        "#7287fd", "https://www.atspro.fr/",          "custom"),
+    ("Email",          "#ea4335", "mailto:atsprofessional67@gmail.com", "simpleicons"),
+    ("Potion Gang",    "#9b59b6", "https://www.potiongang.fr/",      "custom"),
+    ("Buy Me Coffee",  "#ffdd00", "https://buymeacoffee.com/ats_dopi", "simpleicons"),
 ]
 
+# Custom icon fallbacks: (initials/short text, bg_color)
+CUSTOM_ICONS = {
+    "guns.lol":     ("G", "#a333d8"),
+    "Frost":        ("F", "#00b4d8"),
+    "ATS Pro":      ("A", "#7287fd"),
+    "Potion Gang":  ("P", "#9b59b6"),
+}
 
-def _social_badge(x, y, name, color, icon_svg, url):
-    """Generate a single social badge with a clickable link."""
+
+def _build_social_icon(name, color, icon_type, icon_size):
+    """Build SVG for a social icon — real logo or styled fallback."""
+    if icon_type == "simpleicons" and name in SOCIAL_ICON_DATA:
+        data = SOCIAL_ICON_DATA[name]
+        d = data["path_d"]
+        viewBox = data["viewBox"]
+        fill = "#ffffff" if color == "#ffdd00" else color
+        # For yellow (buymeacoffee), use dark text
+        if color == "#ffdd00":
+            fill = "#222222"
+        return (f'<svg width="{icon_size}" height="{icon_size}" viewBox="{viewBox}">'
+                f'<path d="{d}" fill="{fill}"/></svg>')
+
+    # Custom fallback: colored circle with initial
+    if name in CUSTOM_ICONS:
+        initial, bg = CUSTOM_ICONS[name]
+        text_color = "#ffffff"
+        if color == "#ffdd00":
+            text_color = "#222222"
+        return (f'<svg width="{icon_size}" height="{icon_size}" viewBox="0 0 24 24">'
+                f'<circle cx="12" cy="12" r="11" fill="{bg}"/>'
+                f'<text x="12" y="17" text-anchor="middle" font-size="14" '
+                f'font-weight="bold" fill="{text_color}" font-family="sans-serif">{initial}</text>'
+                f'</svg>')
+
+    return (f'<svg width="{icon_size}" height="{icon_size}" viewBox="0 0 24 24">'
+            f'<text x="12" y="16" text-anchor="middle" font-size="12" '
+            f'fill="#888" font-family="sans-serif">?</text></svg>')
+
+
+def _social_badge(x, y, name, color, url, icon_type):
+    """Generate a single social badge with clickable link."""
     svg = f'  <a href="{url}" target="_blank" rel="noopener noreferrer">\n'
     svg += f'  <g transform="translate({x}, {y})">\n'
-    # Rounded square background
-    svg += f'    <rect width="{BADGE_W}" height="{BADGE_H}" rx="10" fill="{CARD_BG}" stroke="{color}" stroke-width="1.5"/>\n'
+    svg += f'    <rect width="{BADGE_W}" height="{BADGE_H}" rx="12" fill="{CARD_BG}" stroke="{color}" stroke-width="1.5"/>\n'
     # Icon centered
-    icon_size = 28
+    icon_size = 32
     icon_x = (BADGE_W - icon_size) // 2
-    icon_y = (BADGE_H - icon_size) // 2 - 4
-    svg += f'    <svg x="{icon_x}" y="{icon_y}" width="{icon_size}" height="{icon_size}" viewBox="0 0 24 24">{icon_svg}</svg>\n'
+    icon_y = 8
+    icon_svg = _build_social_icon(name, color, icon_type, icon_size)
+    svg += f'    <g transform="translate({icon_x}, {icon_y})">\n'
+    svg += f'      {icon_svg}\n'
+    svg += f'    </g>\n'
     # Label
     label_y = BADGE_H - 6
     display = name if len(name) <= 12 else name[:10] + ".."
@@ -71,27 +97,23 @@ def _social_badge(x, y, name, color, icon_svg, url):
 
 def generate_socials(socials, output_path):
     """Generate the social links SVG."""
-    per_row = min(len(socials), 8)
-    rows = (len(socials) + per_row - 1) // per_row
-
+    per_row = len(socials)
     total_w = per_row * BADGE_W + (per_row - 1) * GAP + 20
-    total_h = rows * BADGE_H + (rows - 1) * GAP + 20
+    total_h = BADGE_H + 20
 
     svg = svg_header(total_w, total_h)
     svg += f'  <rect width="{total_w}" height="{total_h}" fill="none"/>\n'
 
-    for i, (name, color, icon, url) in enumerate(socials):
-        col = i % per_row
-        row = i // per_row
-        x = 10 + col * (BADGE_W + GAP)
-        y = 10 + row * (BADGE_H + GAP)
-        svg += _social_badge(x, y, name, color, icon, url)
+    for i, (name, color, url, icon_type) in enumerate(socials):
+        x = 10 + i * (BADGE_W + GAP)
+        y = 10
+        svg += _social_badge(x, y, name, color, url, icon_type)
 
     svg += svg_footer()
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"  ✓ Social links ({len(socials)} platforms) → {output_path}")
+    print(f"  ✓ Social links ({len(socials)} platforms, real logos) → {output_path}")
 
 
 if __name__ == "__main__":

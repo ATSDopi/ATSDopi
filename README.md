@@ -132,23 +132,6 @@ class ATSDopi:
 
 <br/>
 
-<div align="center">
-
-| Platform | Link |
-| --- | --- |
-| 🌐 **guns.lol** (hub) | [guns.lol/atsdopi](https://guns.lol/atsdopi) |
-| 💬 **Discord** | [discord.com/users/704717426729943070](https://discord.com/users/704717426729943070) |
-| 📸 **Instagram** | [instagram.com/0._ats_.0](https://instagram.com/0._ats_.0) |
-| ❄️ **Frost App** | [frostapp.net](https://www.frostapp.net/) |
-| 🚀 **ATS Pro** | [atspro.fr](https://www.atspro.fr/) |
-| 🧪 **Potion Gang** | [potiongang.fr](https://www.potiongang.fr/) |
-| ✉️ **Email** | [atsprofessional67@gmail.com](mailto:atsprofessional67@gmail.com) |
-| ☕ **Buy Me a Coffee** | [buymeacoffee.com/ats_dopi](https://buymeacoffee.com/ats_dopi) |
-
-</div>
-
-<br/>
-
 ---
 
 <div align="center">

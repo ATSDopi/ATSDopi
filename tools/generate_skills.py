@@ -77,16 +77,20 @@ def _build_icon_svg(tech_name, icon_size):
                 f'xmlns="http://www.w3.org/2000/svg">'
                 f'<path d="{d}" fill="{fill}"/></svg>')
 
-    else:  # devicon — embed full SVG content with namespaced IDs
+    else:  # devicon — extract inner content, namespace IDs, wrap in clean nested svg
         full_svg = data["full_svg"]
-        # Create a safe prefix from tech name
         prefix = re.sub(r'[^a-zA-Z0-9]', '', tech_name)
-        # Namespace all IDs to avoid conflicts
+        # Namespace all IDs
         full_svg = _namespace_ids(full_svg, prefix)
-        # Replace width/height to fit our icon_size
-        fixed = re.sub(r'width="[^"]*"', f'width="{icon_size}"', full_svg, count=1)
-        fixed = re.sub(r'height="[^"]*"', f'height="{icon_size}"', fixed, count=1)
-        return fixed
+        # Extract inner content (everything between <svg> and </svg>)
+        inner = re.sub(r'^<svg[^>]*>', '', full_svg)
+        inner = inner.rsplit('</svg>', 1)[0].strip()
+        # Remove xml:space and other problematic attributes from inner elements
+        inner = inner.replace('xml:space="preserve"', '')
+        # Wrap in a clean nested svg with correct viewBox
+        viewBox = data["viewBox"]
+        return (f'<svg width="{icon_size}" height="{icon_size}" viewBox="{viewBox}">'
+                f'{inner}</svg>')
 
 
 def _badge_svg(x, y, tech_name):
