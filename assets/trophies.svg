@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="230" height="120" viewBox="0 0 230 120" fill="none">
+<defs>
+  <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#7287fd"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#00d4ff"/>
+  </linearGradient>
+  <linearGradient id="gradFooter" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#00d4ff"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#7287fd"/>
+  </linearGradient>
+  <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#a333d8" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#7287fd" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="gradCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#a333d8" stop-opacity="0.4"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+  <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+</defs>
+  <rect width="230" height="120" fill="none"/>
+  <g transform="translate(10, 10)">
+    <rect width="100" height="100" rx="10" fill="#161b22" stroke="#c0c0c0" stroke-width="1.5" opacity="0.95"/>
+    <rect width="100" height="4" rx="2" fill="#c0c0c0"/>
+    <g transform="translate(38, 14)" color="#c0c0c0">
+      <svg width="24" height="24" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 7h8M8 11h8M8 15h5" stroke="currentColor" stroke-width="1.5"/></svg>
+    </g>
+  <text x="50" y="58" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c0c0c0" text-anchor="middle" opacity="1">SILVER</text>
+  <text x="50" y="75" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="middle" opacity="1">Repos</text>
+  <text x="50" y="92" font-size="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c0c0c0" text-anchor="middle" opacity="1">10</text>
+  </g>
+  <g transform="translate(120, 10)">
+    <rect width="100" height="100" rx="10" fill="#161b22" stroke="#c0c0c0" stroke-width="1.5" opacity="0.95"/>
+    <rect width="100" height="4" rx="2" fill="#c0c0c0"/>
+    <g transform="translate(38, 14)" color="#c0c0c0">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z" fill="currentColor"/><path d="M12 13l9-5v8l-9 5-9-5v-8" fill="currentColor" opacity="0.5"/></svg>
+    </g>
+  <text x="50" y="58" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c0c0c0" text-anchor="middle" opacity="1">SILVER</text>
+  <text x="50" y="75" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="middle" opacity="1">Languages</text>
+  <text x="50" y="92" font-size="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c0c0c0" text-anchor="middle" opacity="1">3</text>
+  </g>
+</svg>

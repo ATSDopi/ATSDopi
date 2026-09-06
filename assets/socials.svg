@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="474" height="68" viewBox="0 0 474 68" fill="none">
+<defs>
+  <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#7287fd"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#00d4ff"/>
+  </linearGradient>
+  <linearGradient id="gradFooter" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#00d4ff"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#7287fd"/>
+  </linearGradient>
+  <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#a333d8" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#7287fd" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="gradCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#a333d8" stop-opacity="0.4"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+  <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+</defs>
+  <rect width="474" height="68" fill="none"/>
+  <a href="https://guns.lol/atsdopi" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(10, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#a333d8" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#a333d8" stroke-width="1.5"/><path d="M8 10l4 4 4-4" stroke="#a333d8" stroke-width="2" fill="none"/><circle cx="12" cy="7" r="1.5" fill="#a333d8"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">guns.lol</text>
+  </g>
+  </a>
+  <a href="https://discord.com/users/704717426729943070" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(68, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#5865f2" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><path d="M19 5c-2-1-4-1.5-6-1.5S9 4 7 5c-1 3-1.5 6-1.5 9c1.5 1 3 1.5 4.5 2l1-2c-0.5-0.2-1-0.5-1.5-0.8c0.2-0.1 0.3-0.2 0.5-0.3c2 1 4 1 6 0c0.2 0.1 0.3 0.2 0.5 0.3c-0.5 0.3-1 0.6-1.5 0.8l1 2c1.5-0.5 3-1 4.5-2c0-3-0.5-6-1.5-9z" fill="#5865f2"/><circle cx="9.5" cy="11" r="1.2" fill="white"/><circle cx="14.5" cy="11" r="1.2" fill="white"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">Discord</text>
+  </g>
+  </a>
+  <a href="https://instagram.com/0._ats_.0" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(126, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#e1306c" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="#e1306c" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="#e1306c" stroke-width="1.5"/><circle cx="17" cy="7" r="1.2" fill="#e1306c"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">Instagram</text>
+  </g>
+  </a>
+  <a href="https://www.frostapp.net/" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(184, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#00b4d8" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l-3 6h2v4l-4 2 4 2v4h-2l3 6 3-6h-2v-4l4-2-4-2V8h2z" fill="#00b4d8"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">Frost</text>
+  </g>
+  </a>
+  <a href="https://www.atspro.fr/" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(242, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#7287fd" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#7287fd" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="#7287fd" font-family="monospace">ATS</text></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">ATS Pro</text>
+  </g>
+  </a>
+  <a href="mailto:atsprofessional67@gmail.com" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(300, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#ea4335" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="#ea4335" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="#ea4335" stroke-width="1.5" fill="none"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">Email</text>
+  </g>
+  </a>
+  <a href="https://www.potiongang.fr/" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(358, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#9b59b6" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><path d="M9 3h6v3l-2 4v8c0 2-1 3-3 3s-3-1-3-3v-8L9 6z" fill="none" stroke="#9b59b6" stroke-width="1.5"/><path d="M9 10h6" stroke="#9b59b6" stroke-width="1"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">Potion</text>
+  </g>
+  </a>
+  <a href="https://buymeacoffee.com/ats_dopi" target="_blank" rel="noopener noreferrer">
+  <g transform="translate(416, 10)">
+    <rect width="48" height="48" rx="10" fill="#161b22" stroke="#ffdd00" stroke-width="1.5"/>
+    <svg x="10" y="6" width="28" height="28" viewBox="0 0 24 24"><path d="M6 8h12l-1 10c-.2 1.5-1.5 2.5-3 2.5H10c-1.5 0-2.8-1-3-2.5z" fill="none" stroke="#ffdd00" stroke-width="1.5"/><path d="M6 8h12v-2H6z" fill="#ffdd00" opacity="0.3"/><path d="M18 10h2c1 0 2 1 2 2s-1 2-2 2h-2" stroke="#ffdd00" stroke-width="1.5" fill="none"/></svg>
+    <text x="24" y="42" font-size="8" font-family="Segoe UI, sans-serif" fill="#c9d1d9" text-anchor="middle">Buy Me Cof..</text>
+  </g>
+  </a>
+</svg>

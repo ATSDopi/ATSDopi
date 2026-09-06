@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="60" viewBox="0 0 620 60" fill="none">
+<defs>
+  <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#7287fd"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#00d4ff"/>
+  </linearGradient>
+  <linearGradient id="gradFooter" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#00d4ff"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#7287fd"/>
+  </linearGradient>
+  <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#a333d8" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#7287fd" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="gradCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#a333d8" stop-opacity="0.4"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+  <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+</defs>
+  <rect width="620" height="60" fill="none"/>
+  <mask id="typeMask">
+    <rect x="0" y="0" width="0" height="60" fill="white" id="maskRect">
+      <animate attributeName="width" dur="19.0s" repeatCount="indefinite" values="0;338.52;338.52;338.52;0;0;0;338.52;338.52;338.52;0;0;0;322.4;322.4;322.4;0;0;0;419.12;419.12;419.12;0;0" keyTimes="0.0000;0.0882;0.0882;0.1670;0.2222;0.2432;0.2432;0.3314;0.3314;0.4102;0.4653;0.4863;0.4863;0.5704;0.5704;0.6492;0.7017;0.7227;0.7227;0.8319;0.8319;0.9107;0.9790;1.0000"/>
+    </rect>
+  </mask>
+  <mask id="phraseMask0">
+    <rect x="10" y="0" width="0" height="60" fill="white" id="maskRect0">
+      <animate attributeName="width" dur="4.23s" begin="0.00s" repeatCount="indefinite" values="0;338.52;338.52;0" keyTimes="0.0000;0.3972;0.7518;1.0000"/>
+    </rect>
+  </mask>
+  <text x="10" y="38" font-size="26" font-family="Fira Code, Consolas, Courier New, monospace" font-weight="600" fill="#a333d8" mask="url(#phraseMask0)">Cybersecurity Student</text>
+  <mask id="phraseMask1">
+    <rect x="10" y="0" width="0" height="60" fill="white" id="maskRect1">
+      <animate attributeName="width" dur="4.23s" begin="4.63s" repeatCount="indefinite" values="0;338.52;338.52;0" keyTimes="0.0000;0.3972;0.7518;1.0000"/>
+    </rect>
+  </mask>
+  <text x="10" y="38" font-size="26" font-family="Fira Code, Consolas, Courier New, monospace" font-weight="600" fill="#a333d8" mask="url(#phraseMask1)">CTF Toolbox Developer</text>
+  <mask id="phraseMask2">
+    <rect x="10" y="0" width="0" height="60" fill="white" id="maskRect2">
+      <animate attributeName="width" dur="4.10s" begin="9.26s" repeatCount="indefinite" values="0;322.4;322.4;0" keyTimes="0.0000;0.3902;0.7561;1.0000"/>
+    </rect>
+  </mask>
+  <text x="10" y="38" font-size="26" font-family="Fira Code, Consolas, Courier New, monospace" font-weight="600" fill="#a333d8" mask="url(#phraseMask2)">Full-Stack Developer</text>
+  <mask id="phraseMask3">
+    <rect x="10" y="0" width="0" height="60" fill="white" id="maskRect3">
+      <animate attributeName="width" dur="4.88s" begin="13.76s" repeatCount="indefinite" values="0;419.12;419.12;0" keyTimes="0.0000;0.4262;0.7336;1.0000"/>
+    </rect>
+  </mask>
+  <text x="10" y="38" font-size="26" font-family="Fira Code, Consolas, Courier New, monospace" font-weight="600" fill="#a333d8" mask="url(#phraseMask3)">Python | TypeScript | Rust</text>
+  <rect x="10" y="16" width="3" height="26" fill="#00d4ff" rx="1" id="cursor">
+    <animate attributeName="x" dur="19.0s" repeatCount="indefinite" values="10;348.52;348.52;10;10;348.52;348.52;10;10;332.4;332.4;10;10;429.12;429.12;10" keyTimes="0.0000;0.0882;0.1670;0.2222;0.2432;0.3314;0.4102;0.4653;0.4863;0.5704;0.6492;0.7017;0.7227;0.8319;0.9107;0.9790"/>
+    <animate attributeName="opacity" dur="0.8s" repeatCount="indefinite" values="1;1;0;0;1" keyTimes="0;0.45;0.5;0.95;1"/>
+  </rect>
+</svg>

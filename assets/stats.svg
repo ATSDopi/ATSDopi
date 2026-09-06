@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="195" viewBox="0 0 460 195" fill="none">
+<defs>
+  <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#7287fd"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#00d4ff"/>
+  </linearGradient>
+  <linearGradient id="gradFooter" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#00d4ff"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#7287fd"/>
+  </linearGradient>
+  <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#a333d8" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#7287fd" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="gradCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#a333d8" stop-opacity="0.4"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+  <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+</defs>
+  <rect width="460" height="195" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="20" y="32" font-size="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#a333d8" text-anchor="start" opacity="1">ATSDopi's GitHub Stats</text>
+  <rect x="20" y="40" width="180" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>
+  <g transform="translate(20, 60)">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 2a2 2 0 00-2 2v16a2 2 0 002 2h16a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h16v16H4V4zm2 2h6v2H6V6zm0 4h6v2H6v-2zm0 4h4v2H6v-2z" fill="#39d353"/></svg>
+  <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Total Repos</text>
+  <text x="440" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">10</text>
+  </g>
+  <g transform="translate(20, 87)">
+    <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="#a333d8"/><line x1="12" y1="2" x2="12" y2="9" stroke="#a333d8" stroke-width="2"/><line x1="12" y1="15" x2="12" y2="22" stroke="#a333d8" stroke-width="2"/><line x1="2" y1="12" x2="9" y2="12" stroke="#a333d8" stroke-width="2"/><line x1="15" y1="12" x2="22" y2="12" stroke="#a333d8" stroke-width="2"/></svg>
+  <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Total Commits</text>
+  <text x="440" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">0</text>
+  </g>
+  <g transform="translate(20, 114)">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#00d4ff"/></svg>
+  <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Total Stars</text>
+  <text x="440" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">0</text>
+  </g>
+  <g transform="translate(20, 141)">
+    <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" fill="#7287fd"/><circle cx="18" cy="6" r="2.5" fill="#7287fd"/><circle cx="12" cy="18" r="2.5" fill="#7287fd"/><line x1="6" y1="8.5" x2="6" y2="12" stroke="#7287fd" stroke-width="2"/><line x1="18" y1="8.5" x2="18" y2="12" stroke="#7287fd" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#7287fd" stroke-width="2"/><line x1="12" y1="12" x2="12" y2="15.5" stroke="#7287fd" stroke-width="2"/></svg>
+  <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Total Forks</text>
+  <text x="440" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">0</text>
+  </g>
+  <g transform="translate(20, 168)">
+    <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4" fill="#00d4ff"/><path d="M2 20c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#00d4ff" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="3" fill="#a333d8" opacity="0.6"/></svg>
+  <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Followers</text>
+  <text x="440" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">0</text>
+  </g>
+</svg>

@@ -1,24 +1,17 @@
-<!-- CAPSULE RENDER HEADER BANNER -->
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:7287fd,50:a333d8,100:00d4ff&height=220&section=header&text=ATSDopi&fontSize=80&fontAlignY=35&fontColor=ffffff&stroke=00d4ff&strokeWidth=2&animation=fadeIn&desc=Full-Stack%20%E2%80%A2%20Backend%20%E2%80%A2%20Cybersecurity&descAlignY=55&descSize=18" width="100%" alt="banner" />
+  <img src="./assets/banner.svg" width="100%" alt="banner" />
 </div>
 
 <br/>
 
-<!-- TYPING SVG -->
 <div align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=26&pause=1000&color=A333D8&center=true&vCenter=true&random=false&width=600&lines=Full-Stack+Developer;Backend+Engineer;Cybersecurity+Enthusiast;Python+%7C+TypeScript+%7C+HTML" alt="Typing SVG" />
-  </a>
+  <img src="./assets/typing.svg" alt="Typing SVG" />
 </div>
 
 <br/>
 
-<!-- BADGES -->
 <div align="center">
-  <img src="https://img.shields.io/badge/Status-Online-00d4ff?style=for-the-badge&logo=github&logoColor=white" alt="status" />
-  <img src="https://img.shields.io/badge/Focus-Cybersecurity-a333d8?style=for-the-badge&logo=hackthebox&logoColor=white" alt="focus" />
-  <img src="https://img.shields.io/badge/Stack-Full--Stack-7287fd?style=for-the-badge&logo=react&logoColor=white" alt="stack" />
+  <img src="./assets/badges.svg" alt="badges" />
 </div>
 
 <br/>
@@ -30,38 +23,34 @@
 ```python
 class ATSDopi:
     def __init__(self):
-        self.name = "ATSDopi"
-        self.roles = ["Full-Stack Developer", "Backend Engineer", "Cybersecurity Enthusiast"]
-        self.languages = ["Python", "TypeScript", "JavaScript", "HTML", "CSS", "Bash"]
-        self.tools = ["Docker", "Linux", "Git", "FastAPI", "Node.js"]
-        self.interests = ["LLM", "OSINT", "Pentest", "Automation"]
-        self.learning = "Advanced Security & AI Agents"
+        self.name = "ATS-Dopi"
+        self.role = "Cybersecurity Student"
+        self.current_project = "CTF Toolbox"
+        self.languages = ["Python", "TypeScript", "JavaScript", "C", "C++",
+                          "C#", "Java", "PHP", "Rust", "Swift", "Kotlin"]
+        self.web = ["HTML5", "React", "Next.js", "Node.js", "Electron",
+                    "WordPress", "Android"]
+        self.databases = ["MySQL", "PostgreSQL", "Firebase"]
+        self.tools = ["Docker", "PowerShell", "Figma", "Photoshop",
+                       "Lightroom", "After Effects", "Arduino"]
+        self.interests = ["CTF", "OSINT", "Pentest", "Reverse Engineering",
+                          "LLM", "Automation"]
+        self.location = "France"
+        self.hub = "https://guns.lol/atsdopi"
 ```
 
--  Currently working on a **CTF Toolbox**
--  Always learning: **Offensive Security** & **Defensive Security**
--  Ask me about **Python, TypeScript, Backend architecture**
--  Fun fact: *I turn coffee into commits, and commits into trophies*
+- 🎓 **Cybersecurity Student** based in France
+- 🔨 Currently building a **CTF Toolbox** — a collection of tools for Capture The Flag competitions
+- 🌱 Always learning: **Offensive Security**, **Reverse Engineering** & **LLM Agents**
+- 💬 Ask me about **Python, TypeScript, Backend architecture, CTF challenges**
+- ⚡ Fun fact: *I turn coffee into commits, and commits into trophies 🏆*
 
 ---
 
-###  Tech Stack
+### 🛠️ Tech Stack
 
 <div align="center">
-
-<!-- Web -->
-<img src="https://skillicons.dev/icons?i=html,css,js,ts,react,nodejs,express,tailwind" alt="web" />
-
-<br/>
-
-<!-- Python / AI -->
-<img src="https://skillicons.dev/icons?i=python,fastapi,pytorch,sqlite,postgres" alt="python" />
-
-<br/>
-
-<!-- SysAdmin / Security -->
-<img src="https://skillicons.dev/icons?i=linux,docker,bash,git,githubactions,vscode" alt="sysadmin" />
-
+  <img src="./assets/skills.svg" alt="skills" />
 </div>
 
 <br/>
@@ -71,14 +60,14 @@ class ATSDopi:
 ### 📊 GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=ATSDopi&show_icons=true&theme=radical&hide_border=true&bg_color=00000000&title_color=a333d8&icon_color=00d4ff&text_color=c9c9c9" height="180" alt="stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ATSDopi&layout=compact&theme=radical&hide_border=true&bg_color=00000000&title_color=a333d8&text_color=c9c9c9" height="180" alt="langs" />
+  <img src="./assets/stats.svg" height="195" alt="stats" />
+  <img src="./assets/top-langs.svg" height="195" alt="top-langs" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=ATSDopi&theme=radical&hide_border=true&background=00000000&ring=a333d8&fire=00d4ff&currStreakLabel=00d4ff&sideNums=c9c9c9&sideLabels=c9c9c9&dates=c9c9c9" alt="streak" />
+  <img src="./assets/streak.svg" alt="streak" />
 </div>
 
 <br/>
@@ -88,7 +77,7 @@ class ATSDopi:
 ### 🏆 Trophies
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=ATSDopi&theme=radical&no-frame=true&no-bg=true&column=7&margin-w=8&margin-h=8" alt="trophies" />
+  <img src="./assets/trophies.svg" alt="trophies" />
 </div>
 
 <br/>
@@ -98,17 +87,17 @@ class ATSDopi:
 ### 📈 Activity Graph
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ATSDopi&theme=react-dark&hide_border=true&bg_color=00000000&color=a333d8&line=00d4ff&point=7287fd&area=true&area_color=a333d8" width="90%" alt="activity-graph" />
+  <img src="./assets/activity-graph.svg" width="90%" alt="activity-graph" />
 </div>
 
 <br/>
 
 ---
 
-### 🐍 Snake Game — Contribution Animation
+### 🐍 Snake — Contribution Animation
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/ATSDopi/ATSDopi/output/github-snake-dark.svg" alt="snake" />
+  <img src="./assets/snake.svg" alt="snake" />
 </div>
 
 <br/>
@@ -133,15 +122,55 @@ class ATSDopi:
 
 ---
 
-### 🔗 Find Me
+### 🔗 Find Me Everywhere
+
+> 🌐 **Central hub**: [guns.lol/atsdopi](https://guns.lol/atsdopi) — all my links in one place
 
 <div align="center">
-  <a href="https://github.com/ATSDopi"><img src="https://img.shields.io/badge/GitHub-ATSDopi-181717?style=for-the-badge&logo=github&logoColor=white" alt="github" /></a>
+  <img src="./assets/socials.svg" alt="socials" />
 </div>
 
 <br/>
 
-<!-- CAPSULE RENDER FOOTER BANNER -->
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00d4ff,50:a333d8,100:7287fd&height=120&section=footer&fontSize=0" width="100%" alt="footer" />
+
+| Platform | Link |
+| --- | --- |
+| 🌐 **guns.lol** (hub) | [guns.lol/atsdopi](https://guns.lol/atsdopi) |
+| 💬 **Discord** | [discord.com/users/704717426729943070](https://discord.com/users/704717426729943070) |
+| 📸 **Instagram** | [instagram.com/0._ats_.0](https://instagram.com/0._ats_.0) |
+| ❄️ **Frost App** | [frostapp.net](https://www.frostapp.net/) |
+| 🚀 **ATS Pro** | [atspro.fr](https://www.atspro.fr/) |
+| 🧪 **Potion Gang** | [potiongang.fr](https://www.potiongang.fr/) |
+| ✉️ **Email** | [atsprofessional67@gmail.com](mailto:atsprofessional67@gmail.com) |
+| ☕ **Buy Me a Coffee** | [buymeacoffee.com/ats_dopi](https://buymeacoffee.com/ats_dopi) |
+
 </div>
+
+<br/>
+
+---
+
+<div align="center">
+  <img src="./assets/footer.svg" width="100%" alt="footer" />
+</div>
+
+---
+
+<details>
+<summary>🔧 How this profile works</summary>
+
+All SVG assets in this profile are **100% self-generated** — no external services used.
+
+The `tools/` directory contains Python scripts that:
+1. Fetch real data from the GitHub API (REST + GraphQL)
+2. Generate animated SVG cards with SMIL animations
+3. Are run automatically by a GitHub Action (`.github/workflows/generate-assets.yml`) every day
+
+To regenerate manually:
+```bash
+pip install -r tools/requirements.txt
+python tools/generate_all.py ATSDopi
+```
+
+</details>

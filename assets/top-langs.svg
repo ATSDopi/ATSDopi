@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="195" viewBox="0 0 460 195" fill="none">
+<defs>
+  <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#7287fd"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#00d4ff"/>
+  </linearGradient>
+  <linearGradient id="gradFooter" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#00d4ff"/>
+    <stop offset="50%" stop-color="#a333d8"/>
+    <stop offset="100%" stop-color="#7287fd"/>
+  </linearGradient>
+  <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#a333d8" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#7287fd" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="gradCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#a333d8" stop-opacity="0.4"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+  <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+</defs>
+  <rect width="460" height="195" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="20" y="32" font-size="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#a333d8" text-anchor="start" opacity="1">Most Used Languages</text>
+  <rect x="20" y="40" width="200" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>
+  <rect x="20.0" y="55" width="280.0" height="10" rx="2" fill="#3178c6"/>
+  <rect x="300.0" y="55" width="93.3" height="10" rx="2" fill="#e34c26"/>
+  <rect x="393.3" y="55" width="46.7" height="10" rx="2" fill="#3572A5"/>
+  <circle cx="26" cy="81" r="5" fill="#3178c6"/>
+  <text x="38" y="85" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">TypeScript</text>
+  <text x="440" y="85" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">66.7%</text>
+  <circle cx="26" cy="103" r="5" fill="#e34c26"/>
+  <text x="38" y="107" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">HTML</text>
+  <text x="440" y="107" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">22.2%</text>
+  <circle cx="26" cy="125" r="5" fill="#3572A5"/>
+  <text x="38" y="129" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">Python</text>
+  <text x="440" y="129" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">11.1%</text>
+</svg>
