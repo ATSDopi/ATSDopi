@@ -1,7 +1,8 @@
 """
 Generate an animated typing SVG using SMIL.
-Simulates a typewriter effect by revealing text left-to-right with a mask,
-cycling through multiple phrases with a blinking cursor.
+Uses a SINGLE global timeline — all phrases share the same dur and repeatCount.
+Each phrase is only visible during its time slot via synchronized opacity + mask animations.
+No overlapping, no drift.
 """
 
 import sys
@@ -14,6 +15,8 @@ WIDTH = 620
 HEIGHT = 60
 FONT_SIZE = 26
 FONT_FAMILY = "Fira Code, Consolas, Courier New, monospace"
+X_START = 10
+Y_TEXT = 38
 
 
 def _text_width(text, font_size=FONT_SIZE):
@@ -23,171 +26,152 @@ def _text_width(text, font_size=FONT_SIZE):
 
 def generate_typing(phrases, output_path):
     """
-    Generate a typing animation SVG.
-    Each phrase is revealed character by character, held, then erased.
+    Generate a typing animation with a single global timeline.
+    Each phrase: types in → holds → erases → pause before next.
     """
-    svg = svg_header(WIDTH, HEIGHT)
+    # Calculate timing for each phrase
+    phrase_timings = []
+    current_time = 0.0
 
+    for phrase in phrases:
+        tw = _text_width(phrase)
+        type_dur = max(len(phrase) * 0.08, 0.5)
+        hold_dur = 1.5
+        erase_dur = max(len(phrase) * 0.05, 0.3)
+        pause_dur = 0.4
+
+        phrase_timings.append({
+            "text": phrase,
+            "width": tw,
+            "start": current_time,
+            "type_end": current_time + type_dur,
+            "hold_end": current_time + type_dur + hold_dur,
+            "erase_end": current_time + type_dur + hold_dur + erase_dur,
+            "end": current_time + type_dur + hold_dur + erase_dur + pause_dur,
+        })
+        current_time += type_dur + hold_dur + erase_dur + pause_dur
+
+    total_dur = current_time
+
+    svg = svg_header(WIDTH, HEIGHT)
     svg += f'  <rect width="{WIDTH}" height="{HEIGHT}" fill="none"/>\n'
 
-    # Mask that reveals text from left to right (typing effect)
-    # We use a rect whose width animates to simulate typing
-    svg += '  <mask id="typeMask">\n'
-    svg += f'    <rect x="0" y="0" width="0" height="{HEIGHT}" fill="white" id="maskRect">\n'
+    # ─── For each phrase: a mask (typing/erasing) + opacity (visibility) ───
+    for i, pt in enumerate(phrase_timings):
+        tw = pt["width"]
+        s = pt["start"]
+        te = pt["type_end"]
+        he = pt["hold_end"]
+        ee = pt["erase_end"]
+        end = pt["end"]
 
-    # Calculate timing for each phrase
-    # Each phrase: type (len*0.08s) + hold (1s) + erase (len*0.05s) + pause (0.3s)
-    total_time = 0
-    mask_values = []  # list of (time, width)
-    cursor_x_values = []  # list of (time, x)
-
-    for phrase in phrases:
-        tw = _text_width(phrase)
-        type_dur = max(len(phrase) * 0.08, 0.5)
-        hold_dur = 1.5
-        erase_dur = max(len(phrase) * 0.05, 0.3)
-        pause_dur = 0.4
-
-        # Type: width goes 0 → tw
-        mask_values.append((total_time, 0))
-        mask_values.append((total_time + type_dur, tw))
-        cursor_x_values.append((total_time, 0))
-        cursor_x_values.append((total_time + type_dur, tw))
-
-        # Hold: width stays at tw
-        total_time += type_dur
-        mask_values.append((total_time, tw))
-        cursor_x_values.append((total_time, tw))
-
-        # Hold
-        total_time += hold_dur
-        mask_values.append((total_time, tw))
-        cursor_x_values.append((total_time, tw))
-
-        # Erase: width goes tw → 0
-        mask_values.append((total_time + erase_dur, 0))
-        cursor_x_values.append((total_time + erase_dur, 0))
-
-        total_time += erase_dur + pause_dur
-        mask_values.append((total_time, 0))
-        cursor_x_values.append((total_time, 0))
-
-    # Build mask animation values string
-    mask_val_str = ";".join(f"{w}" for _, w in mask_values)
-    mask_time_str = ";".join(f"{t:.2f}s" for t, _ in mask_values)
-
-    svg += f'      <animate attributeName="width" dur="{total_time:.1f}s" '
-    svg += f'repeatCount="indefinite" values="{mask_val_str}" '
-    svg += f'keyTimes="{";".join(f"{t/total_time:.4f}" for t, _ in mask_values)}"/>\n'
-    svg += '    </rect>\n'
-    svg += '  </mask>\n'
-
-    # Build the text content — all phrases overlaid, each visible during its time slot
-    x_start = 10
-    y_text = HEIGHT // 2 + FONT_SIZE // 3
-
-    for idx, phrase in enumerate(phrases):
-        tw = _text_width(phrase)
-        type_dur = max(len(phrase) * 0.08, 0.5)
-        hold_dur = 1.5
-        erase_dur = max(len(phrase) * 0.05, 0.3)
-        pause_dur = 0.4
-
-        # Calculate this phrase's start time
-        start_t = 0
-        for prev in phrases[:idx]:
-            start_t += max(len(prev) * 0.08, 0.5) + 1.5 + max(len(prev) * 0.05, 0.3) + 0.4
-
-        phrase_dur = type_dur + hold_dur + erase_dur
-
-        # Individual mask for this phrase
-        mask_id = f"phraseMask{idx}"
+        # ── Mask: controls the typing/erasing width ──
+        # All masks use the SAME dur (total_dur) and begin="0s" — no drift
+        mask_id = f"mask{i}"
         svg += f'  <mask id="{mask_id}">\n'
-        svg += f'    <rect x="{x_start}" y="0" width="0" height="{HEIGHT}" fill="white" id="maskRect{idx}">\n'
+        svg += f'    <rect x="{X_START}" y="0" width="0" height="{HEIGHT}" fill="white">\n'
 
-        # Type phase
-        p_mask_values = []
-        t = 0
-        p_mask_values.append((t, 0))
-        t += type_dur
-        p_mask_values.append((t, tw))
-        t += hold_dur
-        p_mask_values.append((t, tw))
-        t += erase_dur
-        p_mask_values.append((t, 0))
+        # Build values and keyTimes for the ENTIRE timeline
+        # Points: 0→start (width=0), start→type_end (0→tw), type_end→hold_end (tw),
+        #         hold_end→erase_end (tw→0), erase_end→total_dur (0)
+        mask_values = []
+        mask_keytimes = []
 
-        p_val_str = ";".join(f"{w}" for _, w in p_mask_values)
-        p_keytimes = ";".join(f"{t_val / phrase_dur:.4f}" for t_val, _ in p_mask_values)
+        def add_point(t, w):
+            mask_values.append(f"{w:.1f}")
+            mask_keytimes.append(f"{t / total_dur:.6f}")
 
-        svg += f'      <animate attributeName="width" dur="{phrase_dur:.2f}s" '
-        svg += f'begin="{start_t:.2f}s" repeatCount="indefinite" '
-        svg += f'values="{p_val_str}" keyTimes="{p_keytimes}"/>\n'
-        svg += '    </rect>\n'
-        svg += '  </mask>\n'
+        add_point(0, 0)
+        add_point(s, 0)
+        add_point(te, tw)
+        add_point(he, tw)
+        add_point(ee, 0)
+        add_point(total_dur, 0)
 
-        # The text element, masked
-        svg += f'  <text x="{x_start}" y="{y_text}" font-size="{FONT_SIZE}" '
+        svg += f'      <animate attributeName="width" dur="{total_dur:.2f}s" '
+        svg += f'begin="0s" repeatCount="indefinite" '
+        svg += f'values="{";".join(mask_values)}" '
+        svg += f'keyTimes="{";".join(mask_keytimes)}"/>\n'
+        svg += f'    </rect>\n'
+        svg += f'  </mask>\n'
+
+        # ── Text element with mask + opacity safety net ──
+        # Opacity: 0 everywhere except during [start, erase_end]
+        svg += f'  <text x="{X_START}" y="{Y_TEXT}" font-size="{FONT_SIZE}" '
         svg += f'font-family="{FONT_FAMILY}" font-weight="600" fill="{PURPLE}" '
-        svg += f'mask="url(#{mask_id})">{phrase}</text>\n'
+        svg += f'mask="url(#{mask_id})" opacity="0">\n'
+        svg += f'    {pt["text"]}\n'
 
-    # Blinking cursor — appears at the end of typed text
-    # We animate its x position and opacity
-    cursor_x = x_start
-    cursor_y_top = y_text - FONT_SIZE + 4
-    cursor_y_bot = y_text + 4
+        # Opacity animation on the same global timeline
+        op_values = []
+        op_keytimes = []
 
-    # Build cursor x animation
-    cursor_times = []
-    cursor_xs = []
-    t = 0
-    for phrase in phrases:
-        tw = _text_width(phrase)
-        type_dur = max(len(phrase) * 0.08, 0.5)
-        hold_dur = 1.5
-        erase_dur = max(len(phrase) * 0.05, 0.3)
-        pause_dur = 0.4
+        def add_op(t, v):
+            op_values.append(f"{v}")
+            op_keytimes.append(f"{t / total_dur:.6f}")
 
-        cursor_times.append(t)
-        cursor_xs.append(x_start)
-        t += type_dur
-        cursor_times.append(t)
-        cursor_xs.append(x_start + tw)
-        t += hold_dur
-        cursor_times.append(t)
-        cursor_xs.append(x_start + tw)
-        t += erase_dur
-        cursor_times.append(t)
-        cursor_xs.append(x_start)
-        t += pause_dur
+        add_op(0, 0)
+        add_op(s, 0)
+        add_op(s + 0.01, 1)       # fade in instantly at start
+        add_op(ee - 0.01, 1)      # stay visible until erase done
+        add_op(ee, 0)             # fade out instantly at erase end
+        add_op(total_dur, 0)
 
-    cursor_keytimes = ";".join(f"{t_val / total_time:.4f}" for t_val in cursor_times)
-    cursor_x_vals = ";".join(f"{x}" for x in cursor_xs)
+        svg += f'    <animate attributeName="opacity" dur="{total_dur:.2f}s" '
+        svg += f'begin="0s" repeatCount="indefinite" '
+        svg += f'values="{";".join(op_values)}" '
+        svg += f'keyTimes="{";".join(op_keytimes)}"/>\n'
+        svg += f'  </text>\n'
 
-    svg += f'  <rect x="{x_start}" y="{cursor_y_top}" width="3" height="{FONT_SIZE}" '
-    svg += f'fill="{CYAN}" rx="1" id="cursor">\n'
-    svg += f'    <animate attributeName="x" dur="{total_time:.1f}s" '
-    svg += f'repeatCount="indefinite" values="{cursor_x_vals}" '
-    svg += f'keyTimes="{cursor_keytimes}"/>\n'
+    # ─── Blinking cursor ───
+    # The cursor x position follows the currently typing text
+    cursor_values = []
+    cursor_keytimes = []
+
+    def add_cursor(t, x):
+        cursor_values.append(f"{x:.1f}")
+        cursor_keytimes.append(f"{t / total_dur:.6f}")
+
+    add_cursor(0, X_START)
+
+    for pt in phrase_timings:
+        add_cursor(pt["start"], X_START)
+        add_cursor(pt["type_end"], X_START + pt["width"])
+        add_cursor(pt["hold_end"], X_START + pt["width"])
+        add_cursor(pt["erase_end"], X_START)
+        add_cursor(pt["end"], X_START)
+
+    add_cursor(total_dur, X_START)
+
+    cursor_y_top = Y_TEXT - FONT_SIZE + 4
+    cursor_height = FONT_SIZE
+
+    svg += f'  <rect x="{X_START}" y="{cursor_y_top}" width="3" height="{cursor_height}" '
+    svg += f'fill="{CYAN}" rx="1">\n'
+    svg += f'    <animate attributeName="x" dur="{total_dur:.2f}s" '
+    svg += f'begin="0s" repeatCount="indefinite" '
+    svg += f'values="{";".join(cursor_values)}" '
+    svg += f'keyTimes="{";".join(cursor_keytimes)}"/>\n'
     # Blink
     svg += f'    <animate attributeName="opacity" dur="0.8s" '
     svg += f'repeatCount="indefinite" values="1;1;0;0;1" '
     svg += f'keyTimes="0;0.45;0.5;0.95;1"/>\n'
-    svg += '  </rect>\n'
+    svg += f'  </rect>\n'
 
     svg += svg_footer()
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"  ✓ Typing animation → {output_path}")
+    print(f"  ✓ Typing animation ({len(phrases)} phrases, {total_dur:.1f}s loop) → {output_path}")
 
 
 if __name__ == "__main__":
     assets = os.path.join(os.path.dirname(__file__), "..", "assets")
     os.makedirs(assets, exist_ok=True)
     phrases = sys.argv[1:] if len(sys.argv) > 1 else [
+        "Cybersecurity Student",
+        "CTF Toolbox Developer",
         "Full-Stack Developer",
-        "Backend Engineer",
-        "Cybersecurity Enthusiast",
-        "Python | TypeScript | HTML",
+        "Python | TypeScript | Rust",
     ]
     generate_typing(phrases, os.path.join(assets, "typing.svg"))
