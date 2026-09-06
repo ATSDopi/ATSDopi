@@ -94,10 +94,10 @@ class ATSDopi:
 
 ---
 
-### 🐍 Snake — Contribution Animation
+### � Commit Activity
 
 <div align="center">
-  <img src="./assets/snake.svg" alt="snake" />
+  <img src="./assets/snake.svg" alt="contribution heatmap" />
 </div>
 
 <br/>
