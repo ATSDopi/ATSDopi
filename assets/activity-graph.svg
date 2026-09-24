@@ -49,24 +49,24 @@
   <text x="52" y="230.0" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">7</text>
   <line x1="60" y1="270" x2="870" y2="270" stroke="#30363d" stroke-width="0.5" opacity="0.3"/>
   <text x="52" y="274.0" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">0</text>
-  <text x="60.0" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Aug 25</text>
-  <text x="199.65517241379308" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Aug 30</text>
-  <text x="339.31034482758616" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 04</text>
-  <text x="478.9655172413793" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 09</text>
-  <text x="618.6206896551723" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 14</text>
-  <text x="758.2758620689655" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 19</text>
-  <text x="870.0" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 23</text>
-  <path d="M60,270 L60.0,270.0 L87.9,270.0 L115.9,270.0 L143.8,263.7 L171.7,270.0 L199.7,270.0 L227.6,270.0 L255.5,270.0 L283.4,270.0 L311.4,270.0 L339.3,175.7 L367.2,182.0 L395.2,251.1 L423.1,232.3 L451.0,270.0 L479.0,270.0 L506.9,270.0 L534.8,251.1 L562.8,270.0 L590.7,270.0 L618.6,270.0 L646.6,263.7 L674.5,251.1 L702.4,270.0 L730.3,270.0 L758.3,270.0 L786.2,270.0 L814.1,50.0 L842.1,207.1 L870.0,270.0 L870,270 Z" fill="url(#gradPurple)" opacity="0.3"/>
-  <path d="M60.0,270.0 L87.9,270.0 L115.9,270.0 L143.8,263.7 L171.7,270.0 L199.7,270.0 L227.6,270.0 L255.5,270.0 L283.4,270.0 L311.4,270.0 L339.3,175.7 L367.2,182.0 L395.2,251.1 L423.1,232.3 L451.0,270.0 L479.0,270.0 L506.9,270.0 L534.8,251.1 L562.8,270.0 L590.7,270.0 L618.6,270.0 L646.6,263.7 L674.5,251.1 L702.4,270.0 L730.3,270.0 L758.3,270.0 L786.2,270.0 L814.1,50.0 L842.1,207.1 L870.0,270.0" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glow)"/>
-  <circle cx="143.8" cy="263.7" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="339.3" cy="175.7" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="367.2" cy="182.0" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="395.2" cy="251.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="423.1" cy="232.3" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="534.8" cy="251.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="646.6" cy="263.7" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="674.5" cy="251.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="814.1" cy="50.0" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
-  <circle cx="842.1" cy="207.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <text x="60.0" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Aug 26</text>
+  <text x="199.65517241379308" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Aug 31</text>
+  <text x="339.31034482758616" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 05</text>
+  <text x="478.9655172413793" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 10</text>
+  <text x="618.6206896551723" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 15</text>
+  <text x="758.2758620689655" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 20</text>
+  <text x="870.0" y="290" font-size="10" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="middle" opacity="1">Sep 24</text>
+  <path d="M60,270 L60.0,270.0 L87.9,270.0 L115.9,263.7 L143.8,270.0 L171.7,270.0 L199.7,270.0 L227.6,270.0 L255.5,270.0 L283.4,270.0 L311.4,175.7 L339.3,182.0 L367.2,251.1 L395.2,232.3 L423.1,270.0 L451.0,270.0 L479.0,270.0 L506.9,251.1 L534.8,270.0 L562.8,270.0 L590.7,270.0 L618.6,263.7 L646.6,251.1 L674.5,270.0 L702.4,270.0 L730.3,270.0 L758.3,270.0 L786.2,50.0 L814.1,207.1 L842.1,270.0 L870.0,270.0 L870,270 Z" fill="url(#gradPurple)" opacity="0.3"/>
+  <path d="M60.0,270.0 L87.9,270.0 L115.9,263.7 L143.8,270.0 L171.7,270.0 L199.7,270.0 L227.6,270.0 L255.5,270.0 L283.4,270.0 L311.4,175.7 L339.3,182.0 L367.2,251.1 L395.2,232.3 L423.1,270.0 L451.0,270.0 L479.0,270.0 L506.9,251.1 L534.8,270.0 L562.8,270.0 L590.7,270.0 L618.6,263.7 L646.6,251.1 L674.5,270.0 L702.4,270.0 L730.3,270.0 L758.3,270.0 L786.2,50.0 L814.1,207.1 L842.1,270.0 L870.0,270.0" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="115.9" cy="263.7" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="311.4" cy="175.7" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="339.3" cy="182.0" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="367.2" cy="251.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="395.2" cy="232.3" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="506.9" cy="251.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="618.6" cy="263.7" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="646.6" cy="251.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="786.2" cy="50.0" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="814.1" cy="207.1" r="3" fill="#a333d8" stroke="#00d4ff" stroke-width="1"/>
   <text x="870" y="305" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">Total: 91  •  Avg: 3.0/day  •  Max: 35</text>
 </svg>
