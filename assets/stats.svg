@@ -60,6 +60,6 @@
   <g transform="translate(20, 168)">
     <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4" fill="#00d4ff"/><path d="M2 20c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#00d4ff" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="3" fill="#a333d8" opacity="0.6"/></svg>
   <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Followers</text>
-  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">0</text>
+  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">1</text>
   </g>
 </svg>
