@@ -50,7 +50,7 @@
   <g transform="translate(20, 114)">
     <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#00d4ff"/></svg>
   <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Total Stars</text>
-  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">2</text>
+  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">3</text>
   </g>
   <g transform="translate(20, 141)">
     <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" fill="#7287fd"/><circle cx="18" cy="6" r="2.5" fill="#7287fd"/><circle cx="12" cy="18" r="2.5" fill="#7287fd"/><line x1="6" y1="8.5" x2="6" y2="12" stroke="#7287fd" stroke-width="2"/><line x1="18" y1="8.5" x2="18" y2="12" stroke="#7287fd" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#7287fd" stroke-width="2"/><line x1="12" y1="12" x2="12" y2="15.5" stroke="#7287fd" stroke-width="2"/></svg>
@@ -60,6 +60,6 @@
   <g transform="translate(20, 168)">
     <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4" fill="#00d4ff"/><path d="M2 20c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#00d4ff" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="3" fill="#a333d8" opacity="0.6"/></svg>
   <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Followers</text>
-  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">1</text>
+  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">3</text>
   </g>
 </svg>
