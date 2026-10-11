@@ -16,8 +16,7 @@ from github_client import get_contributions
 CELL = 12
 CELL_GAP = 2
 CELL_SIZE = CELL + CELL_GAP
-GRID_COLS = 52  # weeks
-GRID_ROWS = 7  # days
+GRID_ROWS = 7  # days (row 0 = Sunday, like GitHub)
 
 
 def _level_color(count):
@@ -104,34 +103,33 @@ def _ghost_svg(size, color):
     )
 
 
-def generate_pacman(username, output_path):
+def generate_pacman(username, output_path, contribs=None):
     """Generate the animated Pac-Man SVG on the contribution grid."""
-    print(f"  Fetching contributions for pacman ({username})...")
-    contribs = get_contributions(username)
+    if contribs is None:
+        print(f"  Fetching contributions for pacman ({username})...")
+        contribs = get_contributions(username)
     days = contribs["days"]
 
-    if not days:
-        grid = [[0] * GRID_COLS for _ in range(GRID_ROWS)]
-    else:
+    if days:
         sorted_days = sorted(days, key=lambda d: d["date"])
-        if sorted_days:
-            first = datetime.strptime(sorted_days[0]["date"], "%Y-%m-%d")
-            start_date = first - timedelta(days=first.weekday() + 1)
-            if start_date.weekday() == 6:
-                start_date = first
-        else:
-            start_date = datetime.now() - timedelta(days=364)
+        first = datetime.strptime(sorted_days[0]["date"], "%Y-%m-%d")
+        last = datetime.strptime(sorted_days[-1]["date"], "%Y-%m-%d")
+        start_date = first - timedelta(days=(first.weekday() + 1) % 7)
+        grid_cols = (last - start_date).days // 7 + 1
 
         date_map = {d["date"]: d["contributionCount"] for d in sorted_days}
-        grid = [[0] * GRID_COLS for _ in range(GRID_ROWS)]
-        for col in range(GRID_COLS):
+        grid = [[0] * grid_cols for _ in range(GRID_ROWS)]
+        for col in range(grid_cols):
             for row in range(GRID_ROWS):
                 d = start_date + timedelta(days=col * 7 + row)
                 key = d.strftime("%Y-%m-%d")
                 grid[row][col] = date_map.get(key, 0)
+    else:
+        grid_cols = 52
+        grid = [[0] * grid_cols for _ in range(GRID_ROWS)]
 
     # SVG dimensions
-    grid_w = GRID_COLS * CELL_SIZE
+    grid_w = grid_cols * CELL_SIZE
     grid_h = GRID_ROWS * CELL_SIZE
     W = grid_w + 20
     H = grid_h + 20
@@ -144,7 +142,7 @@ def generate_pacman(username, output_path):
     offset_y = 10
 
     for row in range(GRID_ROWS):
-        for col in range(GRID_COLS):
+        for col in range(grid_cols):
             count = grid[row][col]
             color = _level_color(count)
             x = offset_x + col * CELL_SIZE
@@ -153,7 +151,7 @@ def generate_pacman(username, output_path):
 
     # ─── Pac-Man path: serpentine through the grid ───
     path_points = []
-    for col in range(GRID_COLS):
+    for col in range(grid_cols):
         if col % 2 == 0:
             for row in range(GRID_ROWS):
                 cx = offset_x + col * CELL_SIZE + CELL / 2
@@ -239,4 +237,4 @@ if __name__ == "__main__":
     assets = os.path.join(os.path.dirname(__file__), "..", "assets")
     os.makedirs(assets, exist_ok=True)
     username = sys.argv[1] if len(sys.argv) > 1 else "ATSDopi"
-    generate_pacman(username, os.path.join(assets, "snake.svg"))
+    generate_pacman(username, os.path.join(assets, "pacman.svg"))

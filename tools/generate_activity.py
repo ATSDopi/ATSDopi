@@ -24,10 +24,11 @@ CHART_W = W - PADDING_L - PADDING_R
 CHART_H = H - PADDING_T - PADDING_B
 
 
-def generate_activity_graph(username, output_path):
+def generate_activity_graph(username, output_path, contribs=None):
     """Generate the activity graph SVG."""
-    print(f"  Fetching contributions for activity graph ({username})...")
-    contribs = get_contributions(username)
+    if contribs is None:
+        print(f"  Fetching contributions for activity graph ({username})...")
+        contribs = get_contributions(username)
     days = contribs["days"]
 
     if not days:

@@ -18,8 +18,7 @@ from github_client import get_contributions
 CELL = 13
 CELL_GAP = 3
 CELL_SIZE = CELL + CELL_GAP
-GRID_COLS = 53  # weeks (full year)
-GRID_ROWS = 7   # days of week
+GRID_ROWS = 7   # days of week (row 0 = Sunday, like GitHub)
 
 
 def _level_color(count):
@@ -36,30 +35,38 @@ def _level_color(count):
         return "#39d353"
 
 
-def _level_label(count):
-    if count == 0:
-        return "No"
-    elif count <= 3:
-        return "Low"
-    elif count <= 6:
-        return "Mid"
-    elif count <= 9:
-        return "High"
-    else:
-        return "Max"
-
-
-def generate_contributions(username, output_path):
+def generate_contributions(username, output_path, contribs=None):
     """Generate the contribution calendar heatmap SVG."""
-    print(f"  Fetching contributions for heatmap ({username})...")
-    contribs = get_contributions(username)
+    if contribs is None:
+        print(f"  Fetching contributions for heatmap ({username})...")
+        contribs = get_contributions(username)
     days = contribs["days"]
+
+    # Build the grid — aligned on real Sundays, sized to the actual data
+    if days:
+        sorted_days = sorted(days, key=lambda d: d["date"])
+        first = datetime.strptime(sorted_days[0]["date"], "%Y-%m-%d")
+        last = datetime.strptime(sorted_days[-1]["date"], "%Y-%m-%d")
+        start_date = first - timedelta(days=(first.weekday() + 1) % 7)
+        grid_cols = (last - start_date).days // 7 + 1
+
+        date_map = {d["date"]: d["contributionCount"] for d in sorted_days}
+        grid = [[0] * grid_cols for _ in range(GRID_ROWS)]
+        for col in range(grid_cols):
+            for row in range(GRID_ROWS):
+                d = start_date + timedelta(days=col * 7 + row)
+                key = d.strftime("%Y-%m-%d")
+                grid[row][col] = date_map.get(key, 0)
+    else:
+        start_date = None
+        grid_cols = 53
+        grid = [[0] * grid_cols for _ in range(GRID_ROWS)]
 
     # Layout
     label_w = 30  # space for day-of-week labels on left
     title_h = 50
     legend_h = 30
-    grid_w = GRID_COLS * CELL_SIZE
+    grid_w = grid_cols * CELL_SIZE
     grid_h = GRID_ROWS * CELL_SIZE
     W = grid_w + label_w + 30
     H = grid_h + title_h + legend_h + 20
@@ -71,25 +78,6 @@ def generate_contributions(username, output_path):
     svg += text_el(20, 30, f"Commit Activity — Last Year",
                    font_size=16, fill=PURPLE, weight="bold")
     svg += f'  <rect x="20" y="38" width="220" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
-
-    # Build the grid
-    if not days:
-        grid = [[0] * GRID_COLS for _ in range(GRID_ROWS)]
-    else:
-        sorted_days = sorted(days, key=lambda d: d["date"])
-        first = datetime.strptime(sorted_days[0]["date"], "%Y-%m-%d")
-        # Align to Sunday (start of week)
-        start_date = first - timedelta(days=first.weekday() + 1)
-        if start_date.weekday() == 6:
-            start_date = first
-
-        date_map = {d["date"]: d["contributionCount"] for d in sorted_days}
-        grid = [[0] * GRID_COLS for _ in range(GRID_ROWS)]
-        for col in range(GRID_COLS):
-            for row in range(GRID_ROWS):
-                d = start_date + timedelta(days=col * 7 + row)
-                key = d.strftime("%Y-%m-%d")
-                grid[row][col] = date_map.get(key, 0)
 
     # Day-of-week labels (Mon, Wed, Fri)
     day_labels = {1: "Mon", 3: "Wed", 5: "Fri"}
@@ -104,19 +92,10 @@ def generate_contributions(username, output_path):
     month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     last_month = -1
-    for col in range(GRID_COLS):
-        # Check what month this column starts in
-        if days:
-            sorted_days_d = sorted(days, key=lambda d: d["date"])
-            first_d = datetime.strptime(sorted_days_d[0]["date"], "%Y-%m-%d")
-            sd = first_d - timedelta(days=first_d.weekday() + 1)
-            if sd.weekday() == 6:
-                sd = first_d
-            d = sd + timedelta(days=col * 7)
-            m = d.month - 1
-        else:
-            m = col // 5  # fallback
-        if m != last_month and col < GRID_COLS:
+    for col in range(grid_cols):
+        d = start_date + timedelta(days=col * 7) if start_date else None
+        m = d.month - 1 if d else col // 5
+        if m != last_month:
             x = offset_x + col * CELL_SIZE
             svg += text_el(x, offset_y - 8, month_names[m % 12],
                            font_size=10, fill=TEXT_DIM, anchor="start")
@@ -124,7 +103,7 @@ def generate_contributions(username, output_path):
 
     # Draw the contribution cells
     for row in range(GRID_ROWS):
-        for col in range(GRID_COLS):
+        for col in range(grid_cols):
             count = grid[row][col]
             color = _level_color(count)
             x = offset_x + col * CELL_SIZE
@@ -147,8 +126,8 @@ def generate_contributions(username, output_path):
                    "More", font_size=10, fill=TEXT_DIM, anchor="start")
 
     # Summary stats
-    total = sum(grid[row][col] for row in range(GRID_ROWS) for col in range(GRID_COLS))
-    active_days = sum(1 for row in range(GRID_ROWS) for col in range(GRID_COLS) if grid[row][col] > 0)
+    total = sum(grid[row][col] for row in range(GRID_ROWS) for col in range(grid_cols))
+    active_days = sum(1 for row in range(GRID_ROWS) for col in range(grid_cols) if grid[row][col] > 0)
     svg += text_el(20, legend_y + 10,
                    f"{total} contributions in the last year",
                    font_size=11, fill=TEXT, weight="bold")
@@ -167,4 +146,4 @@ if __name__ == "__main__":
     assets = os.path.join(os.path.dirname(__file__), "..", "assets")
     os.makedirs(assets, exist_ok=True)
     username = sys.argv[1] if len(sys.argv) > 1 else "ATSDopi"
-    generate_contributions(username, os.path.join(assets, "snake.svg"))
+    generate_contributions(username, os.path.join(assets, "contributions.svg"))

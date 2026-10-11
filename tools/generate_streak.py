@@ -80,10 +80,11 @@ def _flame_icon(cx, cy, color):
   </g>'''
 
 
-def generate_streak(username, output_path):
+def generate_streak(username, output_path, contribs=None):
     """Generate the streak card SVG."""
-    print(f"  Fetching contributions for {username}...")
-    contribs = get_contributions(username)
+    if contribs is None:
+        print(f"  Fetching contributions for {username}...")
+        contribs = get_contributions(username)
     streak = _compute_streaks(contribs["days"])
 
     svg = svg_header(W, H)

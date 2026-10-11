@@ -45,6 +45,12 @@ TROPHY_DEFS = [
 
     ("pull-requests", "Pull Requests", lambda c: f'<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" fill="none"/>',
      [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
+
+    ("issues", "Issues", lambda c: f'<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/>',
+     [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
+
+    ("reviews", "Reviews", lambda c: f'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-2 14l-4-4 1.4-1.4L10 13.2l6.6-6.6L18 8l-8 8z" fill="currentColor"/>',
+     [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
 ]
 
 
@@ -57,7 +63,9 @@ def _get_trophy_value(key, stats):
         "followers": stats["followers"],
         "forks": stats["total_forks"],
         "languages": len(stats["languages"]),
-        "pull-requests": 0,  # Not easily available via REST; placeholder
+        "pull-requests": stats.get("total_prs", 0),
+        "issues": stats.get("total_issues", 0),
+        "reviews": stats.get("total_reviews", 0),
     }
     return mapping.get(key, 0)
 

@@ -1,4 +1,8 @@
 title: ATSDopi
 description: GitHub profile README — cybersecurity student building CTF/OSINT tools, dev utilities and web apps
+theme: jekyll-theme-hacker
+url: "https://atsdopi.github.io"
+baseurl: "/ATSDopi"
+show_downloads: false
 plugins:
   - jekyll-sitemap

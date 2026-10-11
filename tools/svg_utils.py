@@ -95,3 +95,39 @@ def format_number(n):
     if n >= 1_000:
         return f"{n / 1_000:.1f}k"
     return str(n)
+
+
+def xml_escape(text):
+    """Escape text for safe inclusion in SVG/XML content."""
+    if text is None:
+        return ""
+    return (str(text)
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;"))
+
+
+def time_ago(iso_timestamp, now=None):
+    """Human-readable relative time: '2h ago', '3d ago', etc."""
+    from datetime import datetime, timezone
+    if now is None:
+        now = datetime.now(timezone.utc)
+    try:
+        then = datetime.strptime(iso_timestamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except (ValueError, TypeError):
+        return ""
+    delta = now - then
+    seconds = delta.total_seconds()
+    if seconds < 0:
+        return "just now"
+    if seconds < 3600:
+        m = int(seconds // 60)
+        return f"{m}m ago" if m else "just now"
+    if seconds < 86400:
+        return f"{int(seconds // 3600)}h ago"
+    if seconds < 86400 * 30:
+        return f"{int(seconds // 86400)}d ago"
+    if seconds < 86400 * 365:
+        return f"{int(seconds // (86400 * 30))}mo ago"
+    return f"{int(seconds // (86400 * 365))}y ago"

@@ -7,7 +7,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.dirname(__file__))
-from svg_utils import svg_header, svg_footer, PURPLE, CYAN, INDIGO
+from svg_utils import svg_header, svg_footer, xml_escape, PURPLE, CYAN, INDIGO
 
 BADGE_W = 160
 BADGE_H = 32
@@ -25,9 +25,9 @@ def _badge_svg(x, y, label, value, color):
     # Divider
     svg += f'    <line x1="{label_w}" y1="0" x2="{label_w}" y2="{BADGE_H}" stroke="{color}" stroke-width="1" opacity="0.5"/>\n'
     # Label text
-    svg += f'    <text x="{label_w / 2}" y="21" font-size="11" font-family="Segoe UI, sans-serif" font-weight="bold" fill="{color}" text-anchor="middle">{label}</text>\n'
+    svg += f'    <text x="{label_w / 2}" y="21" font-size="11" font-family="Segoe UI, sans-serif" font-weight="bold" fill="{color}" text-anchor="middle">{xml_escape(label)}</text>\n'
     # Value text
-    svg += f'    <text x="{label_w + (BADGE_W - label_w) / 2}" y="21" font-size="11" font-family="Segoe UI, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="middle">{value}</text>\n'
+    svg += f'    <text x="{label_w + (BADGE_W - label_w) / 2}" y="21" font-size="11" font-family="Segoe UI, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="middle">{xml_escape(value)}</text>\n'
     svg += '  </g>\n'
     return svg
 

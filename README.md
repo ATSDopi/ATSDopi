@@ -1,17 +1,17 @@
 <div align="center">
-  <img src="./assets/banner.svg" width="100%" alt="banner" />
+  <img src="./assets/banner.svg" width="100%" alt="ATS-Dopi — Cybersecurity Student" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="./assets/typing.svg" alt="Typing SVG" />
+  <img src="./assets/typing.svg" alt="Typing animation — Cybersecurity Student, CTF Toolbox Developer, Full-Stack Developer" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="./assets/badges.svg" alt="badges" />
+  <img src="./assets/badges.svg" alt="Status badges" />
 </div>
 
 <br/>
@@ -37,6 +37,7 @@ class ATSDopi:
                           "LLM", "Automation"]
         self.location = "France"
         self.hub = "https://guns.lol/atsdopi"
+        self.profile_readme = "100% self-generated — zero external services"
 ```
 
 - 🎓 **Cybersecurity Student** based in France
@@ -50,7 +51,23 @@ class ATSDopi:
 ### 🛠️ Tech Stack
 
 <div align="center">
-  <img src="./assets/skills.svg" alt="skills" />
+  <img src="./assets/skills.svg" alt="Tech stack — real brand icons" />
+</div>
+
+<br/>
+
+---
+
+### 📂 Featured Projects
+
+<!-- Cards mirror the pinned repos — regenerated daily.
+     Matching <a><img> snippet: assets/projects-fragment.html -->
+
+<div align="center">
+  <a href="https://github.com/ATSDopi/Auto-Desk"><img src="./assets/project-0.svg" width="445" alt="Auto-Desk" /></a>
+  <a href="https://github.com/ATSDopi/ATS-Mail-Sorter"><img src="./assets/project-1.svg" width="445" alt="ATS-Mail-Sorter" /></a>
+  <a href="https://github.com/ATSDopi/TheStudentRepo"><img src="./assets/project-2.svg" width="445" alt="TheStudentRepo" /></a>
+  <a href="https://github.com/ATSDopi/HeadSeaker"><img src="./assets/project-3.svg" width="445" alt="HeadSeaker" /></a>
 </div>
 
 <br/>
@@ -60,14 +77,14 @@ class ATSDopi:
 ### 📊 GitHub Stats
 
 <div align="center">
-  <img src="./assets/stats.svg" height="195" alt="stats" />
-  <img src="./assets/top-langs.svg" height="195" alt="top-langs" />
+  <img src="./assets/stats.svg" height="195" alt="GitHub stats" />
+  <img src="./assets/top-langs.svg" height="195" alt="Most used languages" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="./assets/streak.svg" alt="streak" />
+  <img src="./assets/streak.svg" alt="Contribution streak stats" />
 </div>
 
 <br/>
@@ -77,7 +94,17 @@ class ATSDopi:
 ### 🏆 Trophies
 
 <div align="center">
-  <img src="./assets/trophies.svg" alt="trophies" />
+  <img src="./assets/trophies.svg" alt="GitHub trophies" />
+</div>
+
+<br/>
+
+---
+
+### ⚡ Recent Activity
+
+<div align="center">
+  <img src="./assets/feed.svg" alt="Recent public activity feed" />
 </div>
 
 <br/>
@@ -87,35 +114,35 @@ class ATSDopi:
 ### 📈 Activity Graph
 
 <div align="center">
-  <img src="./assets/activity-graph.svg" width="90%" alt="activity-graph" />
+  <img src="./assets/activity-graph.svg" width="90%" alt="Contribution activity graph — last 30 days" />
 </div>
 
 <br/>
 
 ---
 
-### � Commit Activity
+### 📅 Commit Activity
 
 <div align="center">
-  <img src="./assets/snake.svg" alt="contribution heatmap" />
+  <img src="./assets/contributions.svg" alt="Contribution heatmap — last year" />
 </div>
 
 <br/>
 
 ---
 
-### 📂 Featured Projects
+### 🎮 Pac-Man ate my commits
 
 <div align="center">
+  <img src="./assets/pacman.svg" alt="Animated Pac-Man eating my contribution grid" />
+</div>
 
-| Project | Language | Description |
-| --- | --- | --- |
-| 🤖 [**LLMify**](https://github.com/ATSDopi/LLMify) | HTML | LLM-powered tool |
-| 📸 [**CodeShot**](https://github.com/ATSDopi/CodeShot) | HTML | Styled code screenshots |
-| 🔎 [**HeadSeaker**](https://github.com/ATSDopi/HeadSeaker) | Python | Search / security tool |
-| 📑 [**markdown-to-slides**](https://github.com/ATSDopi/markdown-to-slides) | TypeScript | MD → presentations |
-| 🐺 [**uptime-wolf**](https://github.com/ATSDopi/uptime-wolf) | TypeScript | Uptime monitoring |
+<br/>
 
+---
+
+<div align="center">
+  <img src="./assets/quote.svg" alt="Quote of the day" />
 </div>
 
 <br/>
@@ -142,7 +169,7 @@ class ATSDopi:
 ---
 
 <div align="center">
-  <img src="./assets/footer.svg" width="100%" alt="footer" />
+  <img src="./assets/footer.svg" width="100%" alt="Footer wave" />
 </div>
 
 ---
@@ -150,17 +177,38 @@ class ATSDopi:
 <details>
 <summary>🔧 How this profile works</summary>
 
-All SVG assets in this profile are **100% self-generated** — no external services used.
+<br/>
+
+**Every SVG on this page is self-generated** — no external services, no third-party badge hosts, no rate-limited APIs. Pure Python + GitHub data.
 
 The `tools/` directory contains Python scripts that:
-1. Fetch real data from the GitHub API (REST + GraphQL)
-2. Generate animated SVG cards with SMIL animations
-3. Are run automatically by a GitHub Action (`.github/workflows/generate-assets.yml`) every day
+
+1. Fetch real data from the GitHub API (REST + GraphQL): contribution calendar, pinned repos, public events, aggregated stats
+2. Render SVG cards — including SMIL animations (typing effect, waves, animated Pac-Man)
+3. Run daily via GitHub Actions (`.github/workflows/generate-assets.yml`)
+
+| Asset | Source | Generated by |
+| --- | --- | --- |
+| `banner.svg` / `footer.svg` | static | `generate_banner.py` |
+| `typing.svg` | static | `generate_typing.py` |
+| `badges.svg` | static | `generate_badges.py` |
+| `skills.svg` | static (real brand paths) | `generate_skills.py` |
+| `social-*.svg` | static | `generate_socials.py` |
+| `quote.svg` | daily rotation | `generate_quote.py` |
+| `stats.svg` / `top-langs.svg` | REST + GraphQL | `generate_stats.py` |
+| `streak.svg` | contribution calendar | `generate_streak.py` |
+| `trophies.svg` | real counters | `generate_trophies.py` |
+| `activity-graph.svg` | contribution calendar | `generate_activity.py` |
+| `contributions.svg` | contribution calendar | `generate_contributions.py` |
+| `pacman.svg` | contribution calendar | `generate_pacman.py` |
+| `feed.svg` | public events | `generate_feed.py` |
+| `project-*.svg` | pinned repos | `generate_projects.py` |
 
 To regenerate manually:
+
 ```bash
 pip install -r tools/requirements.txt
-python tools/generate_all.py ATSDopi
+GITHUB_TOKEN=<token> python tools/generate_all.py ATSDopi
 ```
 
 </details>

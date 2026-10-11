@@ -64,6 +64,11 @@ def get_contributions(username):
     query($login: String!) {
       user(login: $login) {
         contributionsCollection {
+          totalCommitContributions
+          totalIssueContributions
+          totalPullRequestContributions
+          totalPullRequestReviewContributions
+          totalRepositoryContributions
           contributionCalendar {
             totalContributions
             colors
@@ -92,7 +97,8 @@ def get_contributions(username):
         print(f"GraphQL errors: {data['errors']}")
         return _scrape_contributions(username)
 
-    cal = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+    coll = data["data"]["user"]["contributionsCollection"]
+    cal = coll["contributionCalendar"]
     days = []
     for week in cal["weeks"]:
         for day in week["contributionDays"]:
@@ -101,6 +107,11 @@ def get_contributions(username):
         "total": cal["totalContributions"],
         "colors": cal["colors"],
         "days": days,
+        "commits": coll["totalCommitContributions"],
+        "issues": coll["totalIssueContributions"],
+        "pull_requests": coll["totalPullRequestContributions"],
+        "reviews": coll["totalPullRequestReviewContributions"],
+        "repos_created": coll["totalRepositoryContributions"],
     }
 
 
@@ -143,7 +154,104 @@ def _scrape_contributions(username):
             "color": levels[int(level)] if int(level) < len(levels) else "#39d353",
             "weekday": 0,
         })
-    return {"total": sum(d["contributionCount"] for d in days), "colors": [], "days": days}
+    return {"total": sum(d["contributionCount"] for d in days), "colors": [], "days": days,
+            "commits": 0, "issues": 0, "pull_requests": 0, "reviews": 0, "repos_created": 0}
+
+
+def get_pinned_repos(username, count=4):
+    """
+    Fetch the user's pinned repositories via GraphQL.
+    Falls back to the top public non-fork repos by stars if pinning data
+    is unavailable (no token) or there are fewer than `count` pins.
+    """
+    pinned = []
+    token = _get_token()
+    if token:
+        query = """
+        query($login: String!) {
+          user(login: $login) {
+            pinnedItems(first: 6, types: REPOSITORY) {
+              nodes {
+                ... on Repository {
+                  name
+                  description
+                  url
+                  stargazerCount
+                  forkCount
+                  primaryLanguage { name color }
+                }
+              }
+            }
+          }
+        }
+        """
+        try:
+            r = requests.post(
+                GITHUB_GRAPHQL,
+                json={"query": query, "variables": {"login": username}},
+                headers=_headers(),
+                timeout=30,
+            )
+            r.raise_for_status()
+            data = r.json()
+            nodes = (data.get("data") or {}).get("user", {}).get("pinnedItems", {}).get("nodes", [])
+            for n in nodes:
+                pinned.append(_normalize_repo(n))
+        except Exception as e:
+            print(f"  ! pinnedItems query failed ({e}) — falling back to top repos")
+
+    pinned_names = {p["name"].lower() for p in pinned}
+    repos = []
+    if len(pinned) < count:
+        # Fill remaining slots with top-starred public repos (not already pinned,
+        # not forks, not the profile README repo itself)
+        candidates = sorted(
+            (r for r in get_repos(username)
+             if not r.get("fork") and r["name"].lower() != username.lower()
+             and r["name"].lower() not in pinned_names),
+            key=lambda r: (
+                r.get("stargazers_count", 0),
+                r.get("description") is not None,
+                r.get("updated_at") or "",
+            ),
+            reverse=True,
+        )
+        for r in candidates:
+            if len(pinned) + len(repos) >= count:
+                break
+            repos.append({
+                "name": r["name"],
+                "description": r.get("description"),
+                "url": r["html_url"],
+                "stargazerCount": r.get("stargazers_count", 0),
+                "forkCount": r.get("forks_count", 0),
+                "primaryLanguage": {"name": r["language"], "color": None} if r.get("language") else None,
+            })
+    return (pinned + repos)[:count]
+
+
+def _normalize_repo(node):
+    """Normalize a GraphQL repository node into a plain dict."""
+    return {
+        "name": node["name"],
+        "description": node.get("description"),
+        "url": node["url"],
+        "stargazerCount": node.get("stargazerCount", 0),
+        "forkCount": node.get("forkCount", 0),
+        "primaryLanguage": node.get("primaryLanguage"),
+    }
+
+
+def get_public_events(username, max_events=20):
+    """Fetch recent public events via REST (PushEvent, CreateEvent, etc.)."""
+    r = requests.get(
+        f"{GITHUB_REST}/users/{username}/events/public",
+        headers=_headers(),
+        params={"per_page": max_events},
+        timeout=30,
+    )
+    r.raise_for_status()
+    return r.json()
 
 
 def compute_stats(username):
@@ -165,9 +273,8 @@ def compute_stats(username):
         if lang:
             lang_counts[lang] = lang_counts.get(lang, 0) + 1
 
-    # Get contribution total
+    # Get contribution totals (GraphQL adds per-type counters when a token exists)
     contribs = get_contributions(username)
-    total_commits = contribs["total"]
 
     return {
         "username": username,
@@ -178,7 +285,11 @@ def compute_stats(username):
         "total_repos": total_repos,
         "total_stars": total_stars,
         "total_forks": total_forks,
-        "total_commits": total_commits,
+        "total_commits": contribs.get("commits") or contribs["total"],
+        "total_contributions": contribs["total"],
+        "total_prs": contribs.get("pull_requests", 0),
+        "total_issues": contribs.get("issues", 0),
+        "total_reviews": contribs.get("reviews", 0),
         "created_at": user.get("created_at", ""),
         "languages": lang_counts,
         "contributions": contribs,

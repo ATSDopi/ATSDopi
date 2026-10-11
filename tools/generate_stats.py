@@ -9,7 +9,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(__file__))
 from svg_utils import (
-    svg_header, svg_footer, card_bg, text_el, format_number,
+    svg_header, svg_footer, card_bg, text_el, format_number, xml_escape,
     PURPLE, CYAN, INDIGO, DARK_BG, CARD_BG, BORDER, TEXT, TEXT_DIM, GREEN
 )
 from github_client import compute_stats
@@ -79,24 +79,25 @@ def generate_stats_card(stats, output_path):
     svg += card_bg(STATS_W, STATS_H)
 
     # Title
-    svg += text_el(20, 32, f"{stats['username']}'s GitHub Stats",
+    svg += text_el(20, 32, f"{xml_escape(stats['username'])}'s GitHub Stats",
                    font_size=16, fill=PURPLE, weight="bold")
     # Underline
     svg += f'  <rect x="20" y="40" width="180" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
-    # Stats rows
+    # Stats rows — real per-type counters from GraphQL (last year window)
     rows = [
-        (_icon_repo(), "Total Repos", format_number(stats["total_repos"])),
-        (_icon_commits(), "Total Commits", format_number(stats["total_commits"])),
+        (_icon_commits(), "Contributions (1y)", format_number(stats["total_contributions"])),
+        (_icon_commits(), "Commits (1y)", format_number(stats["total_commits"])),
         (_icon_star(), "Total Stars", format_number(stats["total_stars"])),
         (_icon_fork(), "Total Forks", format_number(stats["total_forks"])),
+        (_icon_repo(), "Public Repos", format_number(stats["total_repos"])),
         (_icon_followers(), "Followers", format_number(stats["followers"])),
     ]
 
-    y = 60
+    y = 56
     for icon, label, value in rows:
         svg = _stat_row(svg, 20, y, icon, label, value, STATS_W)
-        y += 27
+        y += 23
 
     svg += svg_footer()
 
@@ -143,7 +144,7 @@ def generate_top_langs(stats, output_path):
         # Color dot
         svg += f'  <circle cx="26" cy="{y - 4}" r="5" fill="{color}"/>\n'
         # Language name
-        svg += text_el(38, y, lang, font_size=13, fill=TEXT)
+        svg += text_el(38, y, xml_escape(lang), font_size=13, fill=TEXT)
         # Percentage — right-aligned with padding
         svg += text_el(LANGS_W - 45, y, f"{pct:.1f}%",
                        font_size=13, fill=TEXT, weight="bold", anchor="end")
