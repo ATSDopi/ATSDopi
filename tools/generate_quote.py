@@ -70,14 +70,14 @@ def generate_quote(output_path):
 
     lines = _wrap(quote)
     if len(lines) == 1:
-        svg += text_el(58, 34, xml_escape(lines[0]), font_size=13, fill="#c9d1d9",
-                       family="Georgia, 'Times New Roman', serif")
+        svg += (f'  <text x="58" y="34" font-size="13" font-style="italic" '
+                f'font-family="Georgia, serif" fill="#c9d1d9">{xml_escape(lines[0])}</text>\n')
         svg += text_el(58, 58, f"— {xml_escape(author)}", font_size=11, fill=TEXT_DIM)
     else:
-        svg += text_el(58, 26, xml_escape(lines[0]), font_size=13, fill="#c9d1d9",
-                       family="Georgia, 'Times New Roman', serif")
-        svg += text_el(58, 44, xml_escape(lines[1]), font_size=13, fill="#c9d1d9",
-                       family="Georgia, 'Times New Roman', serif")
+        svg += (f'  <text x="58" y="26" font-size="13" font-style="italic" '
+                f'font-family="Georgia, serif" fill="#c9d1d9">{xml_escape(lines[0])}</text>\n')
+        svg += (f'  <text x="58" y="44" font-size="13" font-style="italic" '
+                f'font-family="Georgia, serif" fill="#c9d1d9">{xml_escape(lines[1])}</text>\n')
         svg += text_el(58, 62, f"— {xml_escape(author)}", font_size=11, fill=TEXT_DIM)
 
     svg += svg_footer()

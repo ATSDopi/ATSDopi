@@ -43,23 +43,44 @@ LANG_COLORS = {
 
 
 def _icon_star():
-    return f'<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="{CYAN}"/>'
+    return (f'<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" '
+            f'fill="none" stroke="{CYAN}" stroke-width="2" stroke-linejoin="round"/>')
+
+
+def _icon_contributions():
+    # activity pulse
+    return (f'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" fill="none" '
+            f'stroke="{PURPLE}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
 
 
 def _icon_commits():
-    return f'<circle cx="12" cy="12" r="3" fill="{PURPLE}"/><line x1="12" y1="2" x2="12" y2="9" stroke="{PURPLE}" stroke-width="2"/><line x1="12" y1="15" x2="12" y2="22" stroke="{PURPLE}" stroke-width="2"/><line x1="2" y1="12" x2="9" y2="12" stroke="{PURPLE}" stroke-width="2"/><line x1="15" y1="12" x2="22" y2="12" stroke="{PURPLE}" stroke-width="2"/>'
+    # git-commit: center dot on a line
+    return (f'<circle cx="12" cy="12" r="3.5" fill="none" stroke="{PURPLE}" stroke-width="2"/>'
+            f'<line x1="3" y1="12" x2="8.5" y2="12" stroke="{PURPLE}" stroke-width="2"/>'
+            f'<line x1="15.5" y1="12" x2="21" y2="12" stroke="{PURPLE}" stroke-width="2"/>')
 
 
 def _icon_fork():
-    return f'<circle cx="6" cy="6" r="2.5" fill="{INDIGO}"/><circle cx="18" cy="6" r="2.5" fill="{INDIGO}"/><circle cx="12" cy="18" r="2.5" fill="{INDIGO}"/><line x1="6" y1="8.5" x2="6" y2="12" stroke="{INDIGO}" stroke-width="2"/><line x1="18" y1="8.5" x2="18" y2="12" stroke="{INDIGO}" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="{INDIGO}" stroke-width="2"/><line x1="12" y1="12" x2="12" y2="15.5" stroke="{INDIGO}" stroke-width="2"/>'
+    # git-branch style
+    return (f'<circle cx="6" cy="6" r="2.6" fill="none" stroke="{INDIGO}" stroke-width="2"/>'
+            f'<circle cx="6" cy="18" r="2.6" fill="none" stroke="{INDIGO}" stroke-width="2"/>'
+            f'<circle cx="18" cy="6" r="2.6" fill="none" stroke="{INDIGO}" stroke-width="2"/>'
+            f'<line x1="6" y1="8.6" x2="6" y2="15.4" stroke="{INDIGO}" stroke-width="2"/>'
+            f'<path d="M18 8.6a9 9 0 0 1-9 9" fill="none" stroke="{INDIGO}" stroke-width="2"/>')
 
 
 def _icon_repo():
-    return f'<path d="M4 2a2 2 0 00-2 2v16a2 2 0 002 2h16a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h16v16H4V4zm2 2h6v2H6V6zm0 4h6v2H6v-2zm0 4h4v2H6v-2z" fill="{GREEN}"/>'
+    # book icon
+    return (f'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z" '
+            f'fill="none" stroke="{GREEN}" stroke-width="2" stroke-linejoin="round"/>')
 
 
 def _icon_followers():
-    return f'<circle cx="9" cy="8" r="4" fill="{CYAN}"/><path d="M2 20c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="{CYAN}" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="3" fill="{PURPLE}" opacity="0.6"/>'
+    # users icon
+    return (f'<circle cx="9" cy="7" r="3.5" fill="none" stroke="{CYAN}" stroke-width="2"/>'
+            f'<path d="M2.5 21v-2a4.5 4.5 0 0 1 4.5-4.5h4a4.5 4.5 0 0 1 4.5 4.5v2" fill="none" stroke="{CYAN}" stroke-width="2"/>'
+            f'<path d="M16.5 4a3.5 3.5 0 0 1 0 7" fill="none" stroke="{CYAN}" stroke-width="2" opacity="0.55"/>'
+            f'<path d="M21.5 21v-2a4.5 4.5 0 0 0-3-4.24" fill="none" stroke="{CYAN}" stroke-width="2" opacity="0.55"/>')
 
 
 def _stat_row(svg, x, y, icon_svg, label, value, w):
@@ -86,7 +107,7 @@ def generate_stats_card(stats, output_path):
 
     # Stats rows — real per-type counters from GraphQL (last year window)
     rows = [
-        (_icon_commits(), "Contributions (1y)", format_number(stats["total_contributions"])),
+        (_icon_contributions(), "Contributions (1y)", format_number(stats["total_contributions"])),
         (_icon_commits(), "Commits (1y)", format_number(stats["total_commits"])),
         (_icon_star(), "Total Stars", format_number(stats["total_stars"])),
         (_icon_fork(), "Total Forks", format_number(stats["total_forks"])),

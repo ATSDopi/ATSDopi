@@ -100,30 +100,24 @@ def generate_streak(username, output_path, contribs=None):
 
     # Current streak
     cx = col_w // 2
-    svg += _flame_icon(cx - 8, 60, ORANGE if streak["current"] > 0 else TEXT_DIM)
-    svg += text_el(cx, 110, str(streak["current"]), font_size=36,
+    svg += _flame_icon(cx - 8, 58, ORANGE if streak["current"] > 0 else TEXT_DIM)
+    svg += text_el(cx, 108, str(streak["current"]), font_size=36,
                    fill=ORANGE, weight="bold", anchor="middle")
-    svg += text_el(cx, 130, "Current", font_size=12,
-                   fill=TEXT_DIM, anchor="middle")
-    svg += text_el(cx, 148, "Days", font_size=11,
+    svg += text_el(cx, 132, "Current Streak", font_size=12,
                    fill=TEXT_DIM, anchor="middle")
 
     # Longest streak
     cx = col_w + col_w // 2
-    svg += text_el(cx, 95, str(streak["longest"]), font_size=36,
+    svg += text_el(cx, 100, str(streak["longest"]), font_size=36,
                    fill=PURPLE, weight="bold", anchor="middle")
-    svg += text_el(cx, 115, "Longest", font_size=12,
-                   fill=TEXT_DIM, anchor="middle")
-    svg += text_el(cx, 133, "Streak", font_size=11,
+    svg += text_el(cx, 132, "Longest Streak", font_size=12,
                    fill=TEXT_DIM, anchor="middle")
 
     # Total contributions
     cx = 2 * col_w + col_w // 2
-    svg += text_el(cx, 95, format_number(streak["total"]), font_size=36,
+    svg += text_el(cx, 100, format_number(streak["total"]), font_size=36,
                    fill=CYAN, weight="bold", anchor="middle")
-    svg += text_el(cx, 115, "Total", font_size=12,
-                   fill=TEXT_DIM, anchor="middle")
-    svg += text_el(cx, 133, "Contributions", font_size=11,
+    svg += text_el(cx, 132, "Contributions", font_size=12,
                    fill=TEXT_DIM, anchor="middle")
 
     # Divider lines

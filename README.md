@@ -81,10 +81,9 @@ class ATSDopi:
   <img src="./assets/top-langs.svg" height="195" alt="Most used languages" />
 </div>
 
-<br/>
-
 <div align="center">
-  <img src="./assets/streak.svg" alt="Contribution streak stats" />
+  <img src="./assets/streak.svg" height="195" alt="Contribution streak stats" />
+  <img src="./assets/feed.svg" height="195" alt="Recent public activity feed" />
 </div>
 
 <br/>
@@ -95,16 +94,6 @@ class ATSDopi:
 
 <div align="center">
   <img src="./assets/trophies.svg" alt="GitHub trophies" />
-</div>
-
-<br/>
-
----
-
-### ⚡ Recent Activity
-
-<div align="center">
-  <img src="./assets/feed.svg" alt="Recent public activity feed" />
 </div>
 
 <br/>

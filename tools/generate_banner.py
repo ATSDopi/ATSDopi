@@ -17,16 +17,17 @@ HEADER_HEIGHT = 220
 FOOTER_HEIGHT = 120
 
 
-def _wave_path(width, height, offset, amplitude=18, wavelength=200):
-    """Generate a sine wave path string."""
+def _wave_path(width, height, offset, amplitude=18, wavelength=200, fill_to=None):
+    """Generate a sine wave path string, filled down to `fill_to`."""
+    if fill_to is None:
+        fill_to = height + amplitude * 2
     points = []
     steps = 80
     for i in range(steps + 1):
         x = (i / steps) * width
         y = height + math.sin((x / wavelength) * 2 * math.pi + offset) * amplitude
         points.append(f"{x:.1f},{y:.1f}")
-    # Close the path to fill the bottom
-    path = f"M0,{height} L" + " L".join(points) + f" L{width},{height + amplitude * 2} L0,{height + amplitude * 2} Z"
+    path = f"M0,{height} L" + " L".join(points) + f" L{width},{fill_to} L0,{fill_to} Z"
     return path
 
 
@@ -54,10 +55,10 @@ def generate_header(username, subtitle, output_path):
         svg += f'      values="{path0};{path1};{path0}"/>\n'
         svg += f'  </path>\n'
 
-    # Username text with glow
+    # Username text — theme gradient + glow
     svg += f'  <text x="{WIDTH // 2}" y="85" font-size="72" font-weight="bold" '
     svg += f'font-family="Segoe UI, Helvetica, Arial, sans-serif" '
-    svg += f'fill="#ffffff" text-anchor="middle" filter="url(#glowStrong)">'
+    svg += f'fill="url(#gradHeader)" text-anchor="middle" filter="url(#glowStrong)">'
     svg += f'{username}</text>\n'
 
     # Subtitle with fade-in animation
@@ -93,7 +94,7 @@ def generate_footer(output_path):
 
     svg += f'  <rect width="{WIDTH}" height="{FOOTER_HEIGHT}" fill="{DARK_BG}"/>\n'
 
-    # Animated waves at the top (mirrored)
+    # Animated waves filling the strip (mirror of the header)
     wave_colors = [CYAN, PURPLE, INDIGO]
     wave_opacities = [0.35, 0.25, 0.15]
     wave_amps = [14, 18, 22]
@@ -101,8 +102,10 @@ def generate_footer(output_path):
 
     for i in range(3):
         wave_id = f"fwave{i}"
-        path0 = _wave_path(WIDTH, 40 + i * 12, 0, wave_amps[i], 200 + i * 50)
-        path1 = _wave_path(WIDTH, 40 + i * 12, math.pi, wave_amps[i], 200 + i * 50)
+        path0 = _wave_path(WIDTH, 30 + i * 16, 0, wave_amps[i], 200 + i * 50,
+                           fill_to=FOOTER_HEIGHT + 4)
+        path1 = _wave_path(WIDTH, 30 + i * 16, math.pi, wave_amps[i], 200 + i * 50,
+                           fill_to=FOOTER_HEIGHT + 4)
         svg += f'  <path id="{wave_id}" d="{path0}" fill="{wave_colors[i]}" opacity="{wave_opacities[i]}">\n'
         svg += f'    <animate attributeName="d" dur="{wave_speeds[i]}s" repeatCount="indefinite"\n'
         svg += f'      values="{path0};{path1};{path0}"/>\n'

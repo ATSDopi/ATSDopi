@@ -41,6 +41,12 @@ CUSTOM_ICONS = {
     "Potion Gang":  ("P", "#9b59b6"),
 }
 
+# Short labels for names too long for the badge
+LABEL_OVERRIDES = {
+    "Buy Me Coffee": "Coffee",
+    "Potion Gang": "Potion",
+}
+
 
 def _build_icon(name, color, icon_source, icon_size):
     """Build SVG fragment for a social icon."""
@@ -81,7 +87,9 @@ def _generate_badge(name, color, url, icon_source, output_path):
     svg += f'  </g>\n'
     # Label
     label_y = BADGE_H - 6
-    display = name if len(name) <= 12 else name[:10] + ".."
+    display = LABEL_OVERRIDES.get(name, name)
+    if len(display) > 12:
+        display = display[:10] + ".."
     svg += f'  <text x="{BADGE_W // 2}" y="{label_y}" font-size="8" font-family="Segoe UI, sans-serif" fill="{TEXT}" text-anchor="middle">{display}</text>\n'
     svg += svg_footer()
 

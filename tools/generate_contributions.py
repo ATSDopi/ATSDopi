@@ -22,9 +22,11 @@ GRID_ROWS = 7   # days of week (row 0 = Sunday, like GitHub)
 
 
 def _level_color(count):
-    """Map contribution count to a color level (GitHub-style green scale)."""
+    """Map contribution count to a color level (GitHub-style green scale).
+    Empty cells stay visible (#21262d) — the card bg is #161b22, using it
+    would make the grid look broken/empty."""
     if count == 0:
-        return "#161b22"
+        return "#21262d"
     elif count <= 3:
         return "#0e4429"
     elif count <= 6:
@@ -117,7 +119,7 @@ def generate_contributions(username, output_path, contribs=None):
     svg += text_el(legend_x - 10, legend_y + 10, "Less",
                    font_size=10, fill=TEXT_DIM, anchor="end")
 
-    levels = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+    levels = ["#21262d", "#0e4429", "#006d32", "#26a641", "#39d353"]
     for i, color in enumerate(levels):
         lx = legend_x + i * (CELL + 2)
         svg += f'  <rect x="{lx}" y="{legend_y}" width="{CELL}" height="{CELL}" rx="2" fill="{color}"/>\n'

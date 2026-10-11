@@ -23,33 +23,34 @@ TIERS = {
 }
 
 # Trophy definitions: (key, label, icon_path_fn, thresholds)
-# thresholds: [(count, tier), ...]  — first match wins
+# thresholds: [(count, tier), ...]  — last matching tier wins
+_ICO = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
 TROPHY_DEFS = [
-    ("stars", "Stars", lambda c: f'<path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4 2.3-7.4-6-4.6h7.6z" fill="currentColor"/>',
+    ("stars", "Stars", lambda c: f'<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" {_ICO}/>',
      [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
 
-    ("commits", "Commits", lambda c: f'<circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 4v5M12 15v5M4 12h5M15 12h5" stroke="currentColor" stroke-width="2"/>',
+    ("commits", "Commits", lambda c: f'<circle cx="12" cy="12" r="3.5" {_ICO}/><line x1="3" y1="12" x2="8.5" y2="12" stroke="currentColor" stroke-width="2"/><line x1="15.5" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>',
      [(10, "bronze"), (100, "silver"), (500, "gold"), (2000, "platinum")]),
 
-    ("repos", "Repos", lambda c: f'<rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 7h8M8 11h8M8 15h5" stroke="currentColor" stroke-width="1.5"/>',
+    ("repos", "Repos", lambda c: f'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z" {_ICO}/>',
      [(1, "bronze"), (5, "silver"), (15, "gold"), (50, "platinum")]),
 
-    ("followers", "Followers", lambda c: f'<circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7" fill="none" stroke="currentColor" stroke-width="2"/>',
+    ("followers", "Followers", lambda c: f'<circle cx="9" cy="7" r="3.5" {_ICO}/><path d="M2.5 21v-2a4.5 4.5 0 0 1 4.5-4.5h4a4.5 4.5 0 0 1 4.5 4.5v2" {_ICO}/><path d="M16.5 4a3.5 3.5 0 0 1 0 7M21.5 21v-2a4.5 4.5 0 0 0-3-4.24" {_ICO} opacity="0.55"/>',
      [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
 
-    ("forks", "Forks", lambda c: f'<circle cx="6" cy="6" r="2.5" fill="currentColor"/><circle cx="18" cy="6" r="2.5" fill="currentColor"/><circle cx="12" cy="18" r="2.5" fill="currentColor"/><path d="M6 8.5V12h12V8.5M12 12v5.5" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+    ("forks", "Forks", lambda c: f'<circle cx="6" cy="6" r="2.6" {_ICO}/><circle cx="6" cy="18" r="2.6" {_ICO}/><circle cx="18" cy="6" r="2.6" {_ICO}/><line x1="6" y1="8.6" x2="6" y2="15.4" stroke="currentColor" stroke-width="2"/><path d="M18 8.6a9 9 0 0 1-9 9" {_ICO}/>',
      [(1, "bronze"), (5, "silver"), (20, "gold"), (100, "platinum")]),
 
-    ("languages", "Languages", lambda c: f'<path d="M12 3l9 5-9 5-9-5 9-5z" fill="currentColor"/><path d="M12 13l9-5v8l-9 5-9-5v-8" fill="currentColor" opacity="0.5"/>',
+    ("languages", "Languages", lambda c: f'<path d="M12 2L2 7l10 5 10-5-10-5z" {_ICO}/><path d="M2 17l10 5 10-5" {_ICO}/><path d="M2 12l10 5 10-5" {_ICO}/>',
      [(1, "bronze"), (3, "silver"), (6, "gold"), (10, "platinum")]),
 
-    ("pull-requests", "Pull Requests", lambda c: f'<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" fill="none"/>',
+    ("pull-requests", "Pull Requests", lambda c: f'<circle cx="18" cy="18" r="3" {_ICO}/><circle cx="6" cy="6" r="3" {_ICO}/><path d="M13 6h3a2 2 0 0 1 2 2v7" {_ICO}/><line x1="6" y1="9" x2="6" y2="21" stroke="currentColor" stroke-width="2"/>',
      [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
 
-    ("issues", "Issues", lambda c: f'<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/>',
+    ("issues", "Issues", lambda c: f'<circle cx="12" cy="12" r="9" {_ICO}/><circle cx="12" cy="12" r="3" fill="currentColor"/>',
      [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
 
-    ("reviews", "Reviews", lambda c: f'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-2 14l-4-4 1.4-1.4L10 13.2l6.6-6.6L18 8l-8 8z" fill="currentColor"/>',
+    ("reviews", "Reviews", lambda c: f'<circle cx="12" cy="12" r="9" {_ICO}/><path d="M8 12l3 3 5-6" {_ICO}/>',
      [(1, "bronze"), (10, "silver"), (50, "gold"), (200, "platinum")]),
 ]
 

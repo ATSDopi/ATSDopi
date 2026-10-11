@@ -15,10 +15,10 @@ from svg_utils import (
 from github_client import get_public_events
 
 W = 460
-MAX_ROWS = 6
+H = 195            # fixed height — pairs with the streak card in the README grid
+MAX_ROWS = 5
 ROW_H = 26
 TOP_H = 48
-BOTTOM_PAD = 14
 
 # event type → accent color
 EVENT_COLORS = {
@@ -51,6 +51,8 @@ def _describe(ev, username):
 
     if t == "PushEvent":
         n = p.get("size") or len(p.get("commits") or [])
+        if n <= 0:
+            return f"Pushed to {repo}", color
         return f"Pushed {n} commit{'s' if n != 1 else ''} to {repo}", color
     if t == "CreateEvent":
         ref_type = p.get("ref_type", "repository")
@@ -105,8 +107,6 @@ def generate_feed(username, output_path, max_rows=MAX_ROWS):
         rows.append((text, color, time_ago(ev.get("created_at"))))
         if len(rows) >= max_rows:
             break
-
-    H = TOP_H + max(len(rows), 1) * ROW_H + BOTTOM_PAD
 
     svg = svg_header(W, H)
     svg += card_bg(W, H)

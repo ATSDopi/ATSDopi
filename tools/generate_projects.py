@@ -9,6 +9,7 @@ README can wrap each <img> in an <a> — making every card clickable.
 
 import sys
 import os
+import re
 
 sys.path.insert(0, os.path.dirname(__file__))
 from svg_utils import (
@@ -65,6 +66,8 @@ def _card(repo):
     """Render one project card."""
     name = repo["name"]
     desc = repo.get("description") or "No description yet — work in progress."
+    # Strip leading emoji — they render as flat monochrome glyphs inside SVG text
+    desc = re.sub(r"^[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\s]+", "", desc).strip()
     lang = repo.get("primaryLanguage") or {}
     lang_name = lang.get("name")
     lang_color = lang.get("color") or INDIGO

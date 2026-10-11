@@ -38,7 +38,7 @@
   <rect width="445" height="3" rx="1.5" fill="url(#gradHeader)" opacity="0.8"/>
   <g transform="translate(18, 16)"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 3a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2h-7l-2-2H4z" fill="none" stroke="#00d4ff" stroke-width="1.8"/></svg></g>
   <text x="44" y="30" font-size="15" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#00d4ff" text-anchor="start" opacity="1">TheStudentRepo</text>
-  <text x="18" y="54" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">🎓 The ultimate student resource list — every student discount,</text>
+  <text x="18" y="54" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">The ultimate student resource list — every student discount,</text>
   <text x="18" y="70" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">credit, freebie and free tool, sorted by category and country…</text>
   <g transform="translate(18, 92)"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#00d4ff"/></svg></g>
   <text x="34" y="104" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">2</text>

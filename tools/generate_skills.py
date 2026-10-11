@@ -29,6 +29,12 @@ TEXT_FALLBACKS = {
     "Lightroom": ("#31a8ff", "Lr"),
 }
 
+# Display labels when the real name is too long for the badge
+LABEL_OVERRIDES = {
+    "After Effects": "Effects",
+    "Lightroom": "Lr",
+}
+
 # Tech groups for display
 SKILL_GROUPS = [
     ["Python", "TypeScript", "JavaScript", "C", "C++", "C#", "Java", "PHP", "Rust", "Swift", "Kotlin"],
@@ -113,9 +119,11 @@ def _badge_svg(x, y, tech_name):
     svg += f'    <g transform="translate({icon_x}, {icon_y})">\n'
     svg += f'      {icon_svg}\n'
     svg += f'    </g>\n'
-    # Label below icon
+    # Label below icon — short labels stay full, long ones get a clean alias
     label_y = BADGE_H - 7
-    display = tech_name if len(tech_name) <= 11 else tech_name[:9] + ".."
+    display = LABEL_OVERRIDES.get(tech_name, tech_name)
+    if len(display) > 11:
+        display = display[:9] + ".."
     svg += f'    <text x="{BADGE_W // 2}" y="{label_y}" font-size="9" font-family="Segoe UI, sans-serif" fill="{TEXT}" text-anchor="middle">{display}</text>\n'
     svg += '  </g>\n'
     return svg
@@ -132,8 +140,10 @@ def generate_skills(groups, output_path):
     svg += f'  <rect width="{total_w}" height="{total_h}" fill="none"/>\n'
 
     for row_idx, group in enumerate(groups):
+        # Center rows that are shorter than the longest row
+        row_off = (max_row_len - len(group)) * (BADGE_W + GAP) / 2
         for col_idx, tech_name in enumerate(group):
-            x = 10 + col_idx * (BADGE_W + GAP)
+            x = 10 + row_off + col_idx * (BADGE_W + GAP)
             y = 10 + row_idx * (BADGE_H + GAP * 2)
             svg += _badge_svg(x, y, tech_name)
 

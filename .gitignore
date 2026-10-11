@@ -21,3 +21,6 @@ desktop.ini
 # Local AI context (public repo — stays local per project conventions)
 AGENTS.md
 CLAUDE.md
+
+# Local visual QA renders
+shots/
