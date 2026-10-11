@@ -43,12 +43,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Rebase first — another run may have pushed while we generated
+          git pull --rebase --autostash
           git add assets/
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            # Rebase first in case another run pushed while we generated
-            git pull --rebase --autostash
             git commit -m "chore: auto-generate profile SVG assets"
             git push
           fi
