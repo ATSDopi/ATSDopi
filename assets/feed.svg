@@ -39,7 +39,7 @@
   <rect x="20" y="38" width="140" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>
   <circle cx="26" cy="56" r="4" fill="#d29922"/>
   <text x="40" y="60" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">Published v0.2.0 in ATS-Mail-Sorter</text>
-  <text x="442" y="60" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">36m ago</text>
+  <text x="442" y="60" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">38m ago</text>
   <circle cx="26" cy="82" r="4" fill="#00d4ff"/>
   <text x="40" y="86" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">Starred Germanized/Guns.lol-viewbotter</text>
   <text x="442" y="86" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">7d ago</text>
