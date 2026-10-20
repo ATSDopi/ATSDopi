@@ -41,7 +41,7 @@
   <text x="18" y="54" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">The ultimate student resource list — every student discount,</text>
   <text x="18" y="70" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">credit, freebie and free tool, sorted by category and country…</text>
   <g transform="translate(18, 92)"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#00d4ff"/></svg></g>
-  <text x="34" y="104" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">3</text>
+  <text x="34" y="104" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">4</text>
   <g transform="translate(57, 92)"><svg width="13" height="13" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4" fill="#7287fd"/><circle cx="18" cy="6" r="2.4" fill="#7287fd"/><circle cx="12" cy="18" r="2.4" fill="#7287fd"/><path d="M6 8.5V12h12V8.5M12 12v3.5" stroke="#7287fd" stroke-width="1.8" fill="none"/></svg></g>
   <text x="73" y="104" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">0</text>
 </svg>
