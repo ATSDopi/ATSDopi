@@ -55,7 +55,7 @@
   <g transform="translate(20, 125)">
     <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6" fill="none" stroke="#7287fd" stroke-width="2"/><circle cx="6" cy="18" r="2.6" fill="none" stroke="#7287fd" stroke-width="2"/><circle cx="18" cy="6" r="2.6" fill="none" stroke="#7287fd" stroke-width="2"/><line x1="6" y1="8.6" x2="6" y2="15.4" stroke="#7287fd" stroke-width="2"/><path d="M18 8.6a9 9 0 0 1-9 9" fill="none" stroke="#7287fd" stroke-width="2"/></svg>
   <text x="32" y="17" font-size="13" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="start" opacity="1">Total Forks</text>
-  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">1</text>
+  <text x="415" y="17" font-size="14" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#c9d1d9" text-anchor="end" opacity="1">2</text>
   </g>
   <g transform="translate(20, 148)">
     <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z" fill="none" stroke="#39d353" stroke-width="2" stroke-linejoin="round"/></svg>
