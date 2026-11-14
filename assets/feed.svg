@@ -39,8 +39,8 @@
   <rect x="20" y="38" width="140" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>
   <circle cx="26" cy="56" r="4" fill="#39d353"/>
   <text x="40" y="60" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">Pushed to TheStudentRepo</text>
-  <text x="442" y="60" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">1d ago</text>
+  <text x="442" y="60" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">2d ago</text>
   <circle cx="26" cy="82" r="4" fill="#d29922"/>
   <text x="40" y="86" font-size="12" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#c9d1d9" text-anchor="start" opacity="1">Labeled an issue in TheStudentRepo</text>
-  <text x="442" y="86" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">2d ago</text>
+  <text x="442" y="86" font-size="11" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="normal" fill="#8b949e" text-anchor="end" opacity="1">3d ago</text>
 </svg>
