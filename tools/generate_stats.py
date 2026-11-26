@@ -127,8 +127,22 @@ def generate_stats_card(stats, output_path):
     print(f"  ✓ Stats card → {output_path}")
 
 
+def _arc(cx, cy, r_out, r_in, a0, a1):
+    """Donut segment path between two angles (degrees, 0 = top)."""
+    import math
+    p0o = (cx + r_out * math.sin(math.radians(a0)), cy - r_out * math.cos(math.radians(a0)))
+    p1o = (cx + r_out * math.sin(math.radians(a1)), cy - r_out * math.cos(math.radians(a1)))
+    p1i = (cx + r_in * math.sin(math.radians(a1)), cy - r_in * math.cos(math.radians(a1)))
+    p0i = (cx + r_in * math.sin(math.radians(a0)), cy - r_in * math.cos(math.radians(a0)))
+    large = 1 if (a1 - a0) % 360 > 180 else 0
+    return (f'M{p0o[0]:.2f} {p0o[1]:.2f} '
+            f'A{r_out} {r_out} 0 {large} 1 {p1o[0]:.2f} {p1o[1]:.2f} '
+            f'L{p1i[0]:.2f} {p1i[1]:.2f} '
+            f'A{r_in} {r_in} 0 {large} 0 {p0i[0]:.2f} {p0i[1]:.2f} Z')
+
+
 def generate_top_langs(stats, output_path):
-    """Generate the top-languages card SVG with a horizontal bar chart."""
+    """Generate the top-languages card as a donut chart of real byte shares."""
     svg = svg_header(LANGS_W, LANGS_H)
     svg += card_bg(LANGS_W, LANGS_H)
 
@@ -137,39 +151,50 @@ def generate_top_langs(stats, output_path):
                    font_size=16, fill=PURPLE, weight="bold")
     svg += f'  <rect x="20" y="40" width="200" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
-    # Sort languages by count
-    langs = sorted(stats["languages"].items(), key=lambda x: x[1], reverse=True)
-    total = sum(c for _, c in langs) or 1
+    # Real byte shares per language (fallback: repo counts)
+    sizes = stats.get("lang_bytes") or stats.get("languages") or {}
+    langs = sorted(sizes.items(), key=lambda x: x[1], reverse=True)
+    total = sum(v for _, v in langs) or 1
 
-    # Take top 5
-    top = langs[:5]
+    top = langs[:6]
+    if len(langs) > 6:
+        top.append(("Other", sum(v for _, v in langs[6:])))
 
-    # Stacked bar
-    bar_x = 20
-    bar_y = 55
-    bar_w = LANGS_W - 40
-    bar_h = 10
+    # Donut — left side
+    cx, cy, r_out, r_in = 112, 126, 54, 34
+    angle = 0.0
+    for lang, size in top:
+        frac = size / total
+        if frac >= 0.9999:
+            color = LANG_COLORS.get(lang, INDIGO)
+            svg += f'  <circle cx="{cx}" cy="{cy}" r="{(r_out + r_in) / 2}" fill="none" stroke="{color}" stroke-width="{r_out - r_in}"/>\n'
+        else:
+            sweep = frac * 360
+            color = LANG_COLORS.get(lang, INDIGO)
+            svg += f'  <path d="{_arc(cx, cy, r_out, r_in, angle, angle + sweep)}" fill="{color}" stroke="{CARD_BG}" stroke-width="1.5"/>\n'
+            angle += sweep
 
-    offset = bar_x
-    for lang, count in top:
+    # Center label: dominant language share
+    if top:
+        name, size = top[0]
+        svg += text_el(cx, cy - 2, f"{size / total * 100:.0f}%",
+                       font_size=20, fill=TEXT, weight="bold", anchor="middle")
+        label = name if len(name) <= 12 else name[:11] + "…"
+        svg += text_el(cx, cy + 15, xml_escape(label),
+                       font_size=10, fill=TEXT_DIM, anchor="middle")
+
+    # Legend — right side, two columns if needed
+    lx = 195
+    y = 78
+    for lang, size in top:
         color = LANG_COLORS.get(lang, INDIGO)
-        w = (count / total) * bar_w
-        svg += f'  <rect x="{offset:.1f}" y="{bar_y}" width="{w:.1f}" height="{bar_h}" rx="2" fill="{color}"/>\n'
-        offset += w
-
-    # Language list with percentages — aligned
-    y = 85
-    for lang, count in top:
-        color = LANG_COLORS.get(lang, INDIGO)
-        pct = (count / total) * 100
-        # Color dot
-        svg += f'  <circle cx="26" cy="{y - 4}" r="5" fill="{color}"/>\n'
-        # Language name
-        svg += text_el(38, y, xml_escape(lang), font_size=13, fill=TEXT)
-        # Percentage — right-aligned with padding
-        svg += text_el(LANGS_W - 45, y, f"{pct:.1f}%",
-                       font_size=13, fill=TEXT, weight="bold", anchor="end")
-        y += 22
+        pct = size / total * 100
+        svg += f'  <circle cx="{lx + 6}" cy="{y - 4}" r="5" fill="{color}"/>\n'
+        name = lang if len(lang) <= 14 else lang[:13] + "…"
+        svg += text_el(lx + 18, y, xml_escape(name), font_size=12, fill=TEXT)
+        svg += text_el(LANGS_W - 24, y, f"{pct:.1f}%",
+                       font_size=12, fill=TEXT_DIM, weight="bold", anchor="end")
+        y += 19
 
     svg += svg_footer()
 

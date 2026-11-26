@@ -12,8 +12,14 @@ GITHUB_GRAPHQL = "https://api.github.com/graphql"
 
 
 def _get_token():
-    """Retrieve GitHub token from env (set by GitHub Actions or user)."""
-    return os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    """Retrieve GitHub token from env.
+
+    PROFILE_TOKEN (a user PAT) takes priority — it unlocks private
+    contribution counts. GITHUB_TOKEN (Actions) only sees public data.
+    """
+    return (os.environ.get("PROFILE_TOKEN")
+            or os.environ.get("GITHUB_TOKEN")
+            or os.environ.get("GH_TOKEN"))
 
 
 def _headers():
@@ -115,47 +121,48 @@ def get_contributions(username):
     }
 
 
+LEVELS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+
+
 def _scrape_contributions(username):
     """
-    Fallback: scrape the contribution calendar from the public HTML page.
-    This works without a token but is less reliable.
+    Fallback: scrape the contribution calendar from the public
+    turbo-frame endpoint (no token needed). Day cells carry
+    data-date/data-level; exact counts live in the tooltips.
+    Returns public contributions only.
     """
     import re
-    r = requests.get(f"https://github.com/{username}", timeout=30,
-                     headers={"User-Agent": "Mozilla/5.0"})
+    from datetime import datetime
+
+    r = requests.get(f"https://github.com/users/{username}/contributions",
+                     timeout=30, headers={"User-Agent": "Mozilla/5.0"})
     r.raise_for_status()
     html = r.text
 
-    # Extract contribution counts from the data-count attributes
-    pattern = r'data-date="([^"]+)"[^>]*data-count="(\d+)"[^>]*data-level="(\d+)"'
-    matches = re.findall(pattern, html)
-    if not matches:
-        # Try alternate pattern
-        pattern2 = r'data-count="(\d+)"[^>]*data-date="([^"]+)"'
-        matches2 = re.findall(pattern2, html)
-        if matches2:
-            days = []
-            for count, date in matches2:
-                days.append({
-                    "date": date,
-                    "contributionCount": int(count),
-                    "color": "#216e39" if int(count) > 0 else "#161b22",
-                    "weekday": 0,
-                })
-            return {"total": sum(d["contributionCount"] for d in days), "colors": [], "days": days}
-        return {"total": 0, "colors": [], "days": []}
+    counts = {}
+    for cid, tip in re.findall(
+            r'for="(contribution-day-component-\d+-\d+)"[^>]*>([^<]+)', html):
+        m = re.match(r"(\d[\d,]*) contribution", tip)
+        counts[cid] = int(m.group(1).replace(",", "")) if m else 0
 
     days = []
-    for date, count, level in matches:
-        levels = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+    for td in re.findall(r"<td[^>]*contribution-day-component-\d+-\d+[^>]*>", html):
+        date = re.search(r'data-date="(\d{4}-\d{2}-\d{2})"', td)
+        cid = re.search(r'id="(contribution-day-component-\d+-\d+)"', td)
+        lvl = re.search(r'data-level="(\d)"', td)
+        if not date or not cid:
+            continue
+        level = int(lvl.group(1)) if lvl else 0
         days.append({
-            "date": date,
-            "contributionCount": int(count),
-            "color": levels[int(level)] if int(level) < len(levels) else "#39d353",
-            "weekday": 0,
+            "date": date.group(1),
+            "contributionCount": counts.get(cid.group(1), 0),
+            "color": LEVELS[level] if level < len(LEVELS) else LEVELS[-1],
+            "weekday": (datetime.strptime(date.group(1), "%Y-%m-%d").weekday() + 1) % 7,
         })
-    return {"total": sum(d["contributionCount"] for d in days), "colors": [], "days": days,
-            "commits": 0, "issues": 0, "pull_requests": 0, "reviews": 0, "repos_created": 0}
+
+    return {"total": sum(d["contributionCount"] for d in days), "colors": [],
+            "days": days, "commits": 0, "issues": 0, "pull_requests": 0,
+            "reviews": 0, "repos_created": 0}
 
 
 def get_pinned_repos(username, count=4):
@@ -242,6 +249,21 @@ def _normalize_repo(node):
     }
 
 
+def get_languages_bytes(username):
+    """Aggregate per-language byte counts across public non-fork repos."""
+    totals = {}
+    for r in get_repos(username):
+        if r.get("fork"):
+            continue
+        resp = requests.get(
+            f"{GITHUB_REST}/repos/{username}/{r['name']}/languages",
+            headers=_headers(), timeout=30)
+        if resp.ok:
+            for lang, size in resp.json().items():
+                totals[lang] = totals.get(lang, 0) + size
+    return totals
+
+
 def get_public_events(username, max_events=20):
     """Fetch recent public events via REST (PushEvent, CreateEvent, etc.)."""
     r = requests.get(
@@ -292,6 +314,7 @@ def compute_stats(username):
         "total_reviews": contribs.get("reviews", 0),
         "created_at": user.get("created_at", ""),
         "languages": lang_counts,
+        "lang_bytes": get_languages_bytes(username),
         "contributions": contribs,
         "repos": [
             {

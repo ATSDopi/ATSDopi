@@ -66,10 +66,10 @@ class ATSDopi:
 
 <div align="center">
 <!-- PROJECT_CARDS:START -->
-  <a href="https://github.com/ATSDopi/Auto-Desk"><img src="./assets/project-0.svg" width="445" alt="Auto-Desk" /></a>
-  <a href="https://github.com/ATSDopi/ATS-Mail-Sorter"><img src="./assets/project-1.svg" width="445" alt="ATS-Mail-Sorter" /></a>
-  <a href="https://github.com/ATSDopi/TheStudentRepo"><img src="./assets/project-2.svg" width="445" alt="TheStudentRepo" /></a>
-  <a href="https://github.com/ATSDopi/HeadSeaker"><img src="./assets/project-3.svg" width="445" alt="HeadSeaker" /></a>
+  <a href="https://github.com/ATSDopi/TheStudentRepo"><img src="./assets/project-0.svg" width="445" alt="TheStudentRepo" /></a>
+  <a href="https://github.com/ATSDopi/HeadSeaker"><img src="./assets/project-1.svg" width="445" alt="HeadSeaker" /></a>
+  <a href="https://github.com/ATSDopi/The-Eye"><img src="./assets/project-2.svg" width="445" alt="The-Eye" /></a>
+  <a href="https://github.com/ATSDopi/blitz-adblock"><img src="./assets/project-3.svg" width="445" alt="blitz-adblock" /></a>
 <!-- PROJECT_CARDS:END -->
 </div>
 
@@ -209,7 +209,9 @@ To regenerate manually:
 
 ```bash
 pip install -r tools/requirements.txt
-GITHUB_TOKEN=<token> python tools/generate_all.py ATSDopi
+# PROFILE_TOKEN (PAT, read:user + repo) also counts private contributions;
+# GITHUB_TOKEN alone only sees public data.
+PROFILE_TOKEN=<token> python tools/generate_all.py ATSDopi
 ```
 
 </details>

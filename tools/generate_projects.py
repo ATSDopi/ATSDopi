@@ -27,7 +27,7 @@ DESC_CHARS = 62
 
 
 def _wrap(text, width, max_lines=2):
-    """Naive word-wrap into at most `max_lines` lines of `width` chars."""
+    """Word-wrap into at most `max_lines` lines, truncating at a word boundary."""
     if not text:
         return []
     words = text.split()
@@ -43,13 +43,25 @@ def _wrap(text, width, max_lines=2):
         lines.append(cur)
     if len(lines) > max_lines:
         lines = lines[:max_lines]
-        lines[-1] = lines[-1][:width - 1].rstrip() + "…"
+        cut = lines[-1][:width - 1].rstrip()
+        lines[-1] = (cut.rsplit(" ", 1)[0] if " " in cut else cut) + "…"
     return lines
 
 
 def _repo_icon():
-    return (f'<path d="M4 3a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2h-7l-2-2H4z" '
-            f'fill="none" stroke="{CYAN}" stroke-width="1.8"/>')
+    # GitHub "repo" book icon
+    return (f'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z" '
+            f'fill="none" stroke="{CYAN}" stroke-width="1.8" stroke-linejoin="round"/>'
+            f'<line x1="8" y1="6" x2="16" y2="6" stroke="{CYAN}" stroke-width="1.4" opacity="0.6"/>')
+
+
+def _pill(text):
+    """GitHub-style visibility pill, top-right."""
+    w = len(text) * 7 + 18
+    return (f'  <g transform="translate({CARD_W - w - 18}, 19)">'
+            f'<rect width="{w}" height="20" rx="10" fill="none" stroke="{BORDER}" stroke-width="1.2"/>'
+            + text_el(w / 2, 14, text, font_size=11, fill=TEXT_DIM, anchor="middle")
+            + '</g>\n')
 
 
 def _star_icon():
@@ -80,11 +92,12 @@ def _card(repo):
     # Top accent line (gradient)
     svg += f'  <rect width="{CARD_W}" height="3" rx="1.5" fill="url(#gradHeader)" opacity="0.8"/>\n'
 
-    # Repo icon + name
-    svg += f'  <g transform="translate(18, 16)"><svg width="18" height="18" viewBox="0 0 24 24">{_repo_icon()}</svg></g>\n'
-    display_name = name if len(name) <= 40 else name[:38] + "…"
-    svg += text_el(44, 30, xml_escape(display_name), font_size=15,
+    # Repo icon + name + visibility pill
+    svg += f'  <g transform="translate(18, 17)"><svg width="17" height="17" viewBox="0 0 24 24">{_repo_icon()}</svg></g>\n'
+    display_name = name if len(name) <= 38 else name[:37] + "…"
+    svg += text_el(43, 31, xml_escape(display_name), font_size=15,
                    fill=CYAN, weight="bold")
+    svg += _pill("Public")
 
     # Description (up to 2 wrapped lines)
     desc_lines = _wrap(desc, DESC_CHARS)

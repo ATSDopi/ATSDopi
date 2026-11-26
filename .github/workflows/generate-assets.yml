@@ -36,6 +36,9 @@ jobs:
 
       - name: Generate all SVG assets
         env:
+          # PROFILE_TOKEN = user PAT → counts private contributions too.
+          # Falls back to the Actions token (public data only) if unset.
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python tools/generate_all.py ATSDopi
 
