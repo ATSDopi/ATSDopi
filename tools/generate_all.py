@@ -32,6 +32,7 @@ from generate_socials import generate_all_socials
 from generate_projects import generate_projects
 from generate_feed import generate_feed
 from generate_quote import generate_quote
+from generate_views import generate_views
 from update_readme import update_readme
 from github_client import compute_stats, get_contributions
 
@@ -132,7 +133,10 @@ def main():
         username, out("feed.svg"),
         recent_repos=stats.get("repos") if stats else None), failures)
 
-    print("[15] Sync README link sections...")
+    print("[15] Profile views badge...")
+    _step("views", lambda: generate_views(username, assets), failures)
+
+    print("[16] Sync README link sections...")
     _step("readme", lambda: update_readme(), failures)
 
     print(f"\n{'=' * 60}")

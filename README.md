@@ -12,6 +12,7 @@
 
 <div align="center">
   <img src="./assets/badges.svg" alt="Status badges" />
+  <img src="./assets/views.svg" alt="Profile views" />
 </div>
 
 <br/>
@@ -197,6 +198,7 @@ The `tools/` directory contains Python scripts that:
 | `contributions.svg` | contribution calendar | `generate_contributions.py` |
 | `pacman.svg` | contribution calendar | `generate_pacman.py` |
 | `feed.svg` | public events | `generate_feed.py` |
+| `views.svg` | repo traffic (14d, cumulative) | `generate_views.py` |
 | `project-*.svg` | pinned repos | `generate_projects.py` |
 | `social-ctftime.svg` | static (flag glyph) | `generate_socials.py` |
 

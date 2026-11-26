@@ -264,6 +264,27 @@ def get_languages_bytes(username):
     return totals
 
 
+def get_traffic_views(username):
+    """Fetch the profile repo's traffic stats (last 14 days).
+
+    Returns {"uniques": int, "views": [{"timestamp", "uniques"}]} or None
+    when the token lacks repo access (traffic needs push-level rights).
+    """
+    try:
+        r = requests.get(
+            f"{GITHUB_REST}/repos/{username}/{username}/traffic/views",
+            headers=_headers(), timeout=30)
+        if not r.ok:
+            print(f"  ! traffic/views -> {r.status_code}")
+            return None
+        data = r.json()
+        return {"uniques": data.get("uniques", 0),
+                "views": data.get("views", [])}
+    except Exception as e:
+        print(f"  ! traffic/views failed ({e})")
+        return None
+
+
 def get_public_events(username, max_events=20):
     """Fetch recent public events via REST (PushEvent, CreateEvent, etc.)."""
     r = requests.get(
