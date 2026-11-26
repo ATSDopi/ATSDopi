@@ -37,7 +37,7 @@ LABEL_OVERRIDES = {
 
 # Tech groups for display
 SKILL_GROUPS = [
-    ["Python", "TypeScript", "JavaScript", "C", "C++", "C#", "Java", "PHP", "Rust", "Swift", "Kotlin"],
+    ["Python", "TypeScript", "JavaScript", "C", "C++", "C#", "Java", "PHP", "Rust", "Swift", "Kotlin", "Go"],
     ["HTML5", "React", "Next.js", "Node.js", "Electron", "WordPress", "Android"],
     ["MySQL", "PostgreSQL", "Firebase", "Docker", "PowerShell"],
     ["Figma", "Photoshop", "Lightroom", "After Effects", "Arduino"],

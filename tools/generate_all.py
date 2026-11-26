@@ -24,7 +24,7 @@ from generate_stats import generate_stats_card, generate_top_langs
 from generate_streak import generate_streak
 from generate_trophies import generate_trophies
 from generate_activity import generate_activity_graph
-from generate_skills import generate_skills
+from generate_skills import generate_skills, SKILL_GROUPS
 from generate_badges import generate_badges
 from generate_contributions import generate_contributions
 from generate_pacman import generate_pacman
@@ -74,12 +74,7 @@ def main():
     ], out("typing.svg")), failures)
 
     print("[3] Skills badges...")
-    _step("skills", lambda: generate_skills([
-        ["Python", "TypeScript", "JavaScript", "C", "C++", "C#", "Java", "PHP", "Rust", "Swift", "Kotlin", "Go"],
-        ["HTML5", "React", "Next.js", "Node.js", "Electron", "WordPress", "Android"],
-        ["MySQL", "PostgreSQL", "Firebase", "Docker", "PowerShell"],
-        ["Figma", "Photoshop", "Lightroom", "After Effects", "Arduino"],
-    ], out("skills.svg")), failures)
+    _step("skills", lambda: generate_skills(SKILL_GROUPS, out("skills.svg")), failures)
 
     print("[4] Status badges...")
     _step("badges", lambda: generate_badges([
