@@ -74,11 +74,11 @@ def generate_contributions(username, output_path, contribs=None):
     H = grid_h + title_h + legend_h + 20
 
     svg = svg_header(W, H)
-    svg += card_bg(W, H)
+    svg += card_bg(W, H, stroke=None)
 
     # Title
     svg += text_el(20, 30, f"Commit Activity — Last Year",
-                   font_size=16, fill=PURPLE, weight="bold")
+                   font_size=16, fill=PURPLE, weight="bold", ls=0.4)
     svg += f'  <rect x="20" y="38" width="220" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
     # Day-of-week labels (Mon, Wed, Fri)

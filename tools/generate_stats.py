@@ -97,11 +97,11 @@ def _stat_row(svg, x, y, icon_svg, label, value, w):
 def generate_stats_card(stats, output_path):
     """Generate the main stats card SVG."""
     svg = svg_header(STATS_W, STATS_H)
-    svg += card_bg(STATS_W, STATS_H)
+    svg += card_bg(STATS_W, STATS_H, stroke=None)
 
     # Title
     svg += text_el(20, 32, f"{xml_escape(stats['username'])}'s GitHub Stats",
-                   font_size=16, fill=PURPLE, weight="bold")
+                   font_size=16, fill=PURPLE, weight="bold", ls=0.4)
     # Underline
     svg += f'  <rect x="20" y="40" width="180" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
@@ -144,11 +144,11 @@ def _arc(cx, cy, r_out, r_in, a0, a1):
 def generate_top_langs(stats, output_path):
     """Generate the top-languages card as a donut chart of real byte shares."""
     svg = svg_header(LANGS_W, LANGS_H)
-    svg += card_bg(LANGS_W, LANGS_H)
+    svg += card_bg(LANGS_W, LANGS_H, stroke=None)
 
     # Title
     svg += text_el(20, 32, "Most Used Languages",
-                   font_size=16, fill=PURPLE, weight="bold")
+                   font_size=16, fill=PURPLE, weight="bold", ls=0.4)
     svg += f'  <rect x="20" y="40" width="200" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
     # Real byte shares per language (fallback: repo counts)

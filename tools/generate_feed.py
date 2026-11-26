@@ -125,10 +125,10 @@ def generate_feed(username, output_path, max_rows=MAX_ROWS, recent_repos=None):
             rows.append((f"Working on {r['name']}", TEXT_DIM, time_ago(r["pushed_at"])))
 
     svg = svg_header(W, H)
-    svg += card_bg(W, H)
+    svg += card_bg(W, H, stroke=None)
 
     # Title
-    svg += text_el(20, 30, "Recent Activity", font_size=16, fill=PURPLE, weight="bold")
+    svg += text_el(20, 30, "Recent Activity", font_size=16, fill=PURPLE, weight="bold", ls=0.4)
     svg += f'  <rect x="20" y="38" width="140" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
     if not rows:

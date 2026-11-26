@@ -34,7 +34,7 @@
   </filter>
 
 </defs>
-  <rect width="445" height="118" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <rect width="445" height="118" rx="12" fill="#161b22" stroke="url(#gradHeader)" stroke-opacity="0.35" stroke-width="1.2"/>
   <rect width="445" height="3" rx="1.5" fill="url(#gradHeader)" opacity="0.8"/>
   <g transform="translate(18, 17)"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linejoin="round"/><line x1="8" y1="6" x2="16" y2="6" stroke="#00d4ff" stroke-width="1.4" opacity="0.6"/></svg></g>
   <text x="43" y="31" font-size="15" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="bold" fill="#00d4ff" text-anchor="start" opacity="1">ATS-Mail-Sorter</text>

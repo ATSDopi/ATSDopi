@@ -18,7 +18,7 @@
 
 ---
 
-### 👋 About Me
+### 👋 &nbsp;About Me
 
 ```python
 class ATSDopi:
@@ -48,7 +48,7 @@ class ATSDopi:
 
 ---
 
-### 🛠️ Tech Stack
+### 🛠️ &nbsp;Tech Stack
 
 <div align="center">
   <img src="./assets/skills.svg" alt="Tech stack — real brand icons" />
@@ -58,7 +58,7 @@ class ATSDopi:
 
 ---
 
-### 📂 Featured Projects
+### 📂 &nbsp;Featured Projects
 
 <!-- Cards mirror the pinned repos (top-starred repos fill any empty slot)
      — regenerated daily. Links below are auto-synced from
@@ -77,7 +77,7 @@ class ATSDopi:
 
 ---
 
-### 📊 GitHub Stats
+### 📊 &nbsp;GitHub Stats
 
 <div align="center">
   <img src="./assets/stats.svg" height="195" alt="GitHub stats" />
@@ -93,7 +93,7 @@ class ATSDopi:
 
 ---
 
-### 🏆 Trophies
+### 🏆 &nbsp;Trophies
 
 <div align="center">
   <img src="./assets/trophies.svg" alt="GitHub trophies" />
@@ -103,7 +103,7 @@ class ATSDopi:
 
 ---
 
-### 📈 Activity Graph
+### 📈 &nbsp;Activity Graph
 
 <div align="center">
   <img src="./assets/activity-graph.svg" width="90%" alt="Contribution activity graph — last 30 days" />
@@ -113,7 +113,7 @@ class ATSDopi:
 
 ---
 
-### 📅 Commit Activity
+### 📅 &nbsp;Commit Activity
 
 <div align="center">
   <img src="./assets/contributions.svg" alt="Contribution heatmap — last year" />
@@ -123,7 +123,7 @@ class ATSDopi:
 
 ---
 
-### 🎮 Pac-Man ate my commits
+### 🎮 &nbsp;Pac-Man ate my commits
 
 <div align="center">
   <img src="./assets/pacman.svg" alt="Animated Pac-Man eating my contribution grid" />
@@ -141,7 +141,7 @@ class ATSDopi:
 
 ---
 
-### 🔗 Find Me Everywhere
+### 🔗 &nbsp;Find Me Everywhere
 
 > 🌐 **Central hub**: [guns.lol/atsdopi](https://guns.lol/atsdopi) — all my links in one place
 

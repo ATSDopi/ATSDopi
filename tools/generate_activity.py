@@ -34,7 +34,7 @@ def generate_activity_graph(username, output_path, contribs=None):
     if not days:
         # Empty state
         svg = svg_header(W, H)
-        svg += card_bg(W, H)
+        svg += card_bg(W, H, stroke=None)
         svg += text_el(W // 2, H // 2, "No contribution data available",
                        font_size=16, fill=TEXT_DIM, anchor="middle")
         svg += svg_footer()
@@ -51,11 +51,11 @@ def generate_activity_graph(username, output_path, contribs=None):
     max_val = max(max_val, 5)  # Minimum scale of 5
 
     svg = svg_header(W, H)
-    svg += card_bg(W, H)
+    svg += card_bg(W, H, stroke=None)
 
     # Title
     svg += text_el(20, 32, f"Activity — Last {len(recent)} Days",
-                   font_size=16, fill=PURPLE, weight="bold")
+                   font_size=16, fill=PURPLE, weight="bold", ls=0.4)
     svg += f'  <rect x="20" y="40" width="250" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 
     # Y-axis grid lines and labels

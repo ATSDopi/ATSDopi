@@ -87,7 +87,7 @@ def _card(repo):
     forks = repo.get("forkCount", 0)
 
     svg = svg_header(CARD_W, CARD_H)
-    svg += card_bg(CARD_W, CARD_H, rx=10)
+    svg += card_bg(CARD_W, CARD_H, rx=12, stroke=None)
 
     # Top accent line (gradient)
     svg += f'  <rect width="{CARD_W}" height="3" rx="1.5" fill="url(#gradHeader)" opacity="0.8"/>\n'

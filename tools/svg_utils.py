@@ -68,18 +68,26 @@ def svg_footer():
 
 
 def card_bg(width, height, rx=12, fill=CARD_BG, stroke=BORDER):
-    """Rounded rectangle card background."""
+    """Rounded rectangle card background.
+
+    stroke=None paints a subtle gradient edge (gradHeader) instead of the
+    flat border — the premium look used on the main cards.
+    """
+    if stroke is None:
+        return (f'  <rect width="{width}" height="{height}" rx="{rx}" fill="{fill}" '
+                f'stroke="url(#gradHeader)" stroke-opacity="0.35" stroke-width="1.2"/>\n')
     return f'  <rect width="{width}" height="{height}" rx="{rx}" fill="{fill}" stroke="{stroke}" stroke-width="1"/>\n'
 
 
 def text_el(x, y, content, font_size=14, fill=TEXT, weight="normal",
             family="Segoe UI, Helvetica, Arial, sans-serif", anchor="start",
-             opacity=1, filter_id=None):
-    """Generate a <text> element."""
+            opacity=1, filter_id=None, ls=None):
+    """Generate a <text> element. `ls` = letter-spacing (px) for titles."""
     filt = f' filter="url(#{filter_id})"' if filter_id else ""
+    spacing = f' letter-spacing="{ls}"' if ls is not None else ""
     return (f'  <text x="{x}" y="{y}" font-size="{font_size}" '
             f'font-family="{family}" font-weight="{weight}" '
-            f'fill="{fill}" text-anchor="{anchor}" opacity="{opacity}"{filt}>'
+            f'fill="{fill}" text-anchor="{anchor}" opacity="{opacity}"{filt}{spacing}>'
             f'{content}</text>\n')
 
 
