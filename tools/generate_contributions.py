@@ -71,7 +71,7 @@ def generate_contributions(username, output_path, contribs=None):
     grid_w = grid_cols * CELL_SIZE
     grid_h = GRID_ROWS * CELL_SIZE
     W = grid_w + label_w + 30
-    H = grid_h + title_h + legend_h + 44
+    H = grid_h + title_h + legend_h + 52
 
     svg = svg_header(W, H)
     svg += card_bg(W, H, stroke=None)
@@ -84,7 +84,7 @@ def generate_contributions(username, output_path, contribs=None):
     # Day-of-week labels (Mon, Wed, Fri)
     day_labels = {1: "Mon", 3: "Wed", 5: "Fri"}
     offset_x = label_w + 10
-    offset_y = title_h + 14
+    offset_y = title_h + 22
 
     for row_idx, label in day_labels.items():
         y = offset_y + row_idx * CELL_SIZE + CELL / 2 + 4
