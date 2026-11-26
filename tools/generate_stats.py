@@ -86,10 +86,10 @@ def _icon_followers():
 def _stat_row(svg, x, y, icon_svg, label, value, w):
     """Add a stat row with icon, label, and value. Numbers right-aligned."""
     svg += f'  <g transform="translate({x}, {y})">\n'
-    svg += f'    <svg width="24" height="24" viewBox="0 0 24 24">{icon_svg}</svg>\n'
-    svg += text_el(32, 17, label, font_size=13, fill=TEXT_DIM)
+    svg += f'    <svg width="20" height="20" viewBox="0 0 24 24">{icon_svg}</svg>\n'
+    svg += text_el(30, 15, label, font_size=13, fill=TEXT_DIM)
     # Right-align all values at the same x position (with padding from border)
-    svg += text_el(w - 45, 17, value, font_size=14, fill=TEXT, weight="bold", anchor="end")
+    svg += text_el(w - 45, 15, value, font_size=14, fill=TEXT, weight="bold", anchor="end")
     svg += '  </g>\n'
     return svg
 
@@ -115,10 +115,10 @@ def generate_stats_card(stats, output_path):
         (_icon_followers(), "Followers", format_number(stats["followers"])),
     ]
 
-    y = 56
+    y = 52
     for icon, label, value in rows:
         svg = _stat_row(svg, 20, y, icon, label, value, STATS_W)
-        y += 23
+        y += 21
 
     svg += svg_footer()
 
@@ -185,7 +185,7 @@ def generate_top_langs(stats, output_path):
 
     # Legend — right side, two columns if needed
     lx = 195
-    y = 78
+    y = 70
     for lang, size in top:
         color = LANG_COLORS.get(lang, INDIGO)
         pct = size / total * 100
@@ -194,7 +194,7 @@ def generate_top_langs(stats, output_path):
         svg += text_el(lx + 18, y, xml_escape(name), font_size=12, fill=TEXT)
         svg += text_el(LANGS_W - 24, y, f"{pct:.1f}%",
                        font_size=12, fill=TEXT_DIM, weight="bold", anchor="end")
-        y += 19
+        y += 18
 
     svg += svg_footer()
 

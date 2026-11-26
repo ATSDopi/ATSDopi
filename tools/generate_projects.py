@@ -110,7 +110,7 @@ def _card(repo):
         y += 16
 
     # Bottom meta row: language dot, stars, forks
-    meta_y = CARD_H - 14
+    meta_y = CARD_H - 16
     x = 18
     if lang_name:
         svg += f'  <circle cx="{x + 5}" cy="{meta_y - 4}" r="5" fill="{lang_color}"/>\n'

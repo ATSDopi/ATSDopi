@@ -71,7 +71,7 @@ def generate_contributions(username, output_path, contribs=None):
     grid_w = grid_cols * CELL_SIZE
     grid_h = GRID_ROWS * CELL_SIZE
     W = grid_w + label_w + 30
-    H = grid_h + title_h + legend_h + 20
+    H = grid_h + title_h + legend_h + 35
 
     svg = svg_header(W, H)
     svg += card_bg(W, H, stroke=None)
