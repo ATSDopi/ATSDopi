@@ -98,9 +98,11 @@ def generate_contributions(username, output_path, contribs=None):
         d = start_date + timedelta(days=col * 7) if start_date else None
         m = d.month - 1 if d else col // 5
         if m != last_month:
+            label = month_names[m % 12]
             x = offset_x + col * CELL_SIZE
-            svg += text_el(x, offset_y - 8, month_names[m % 12],
-                           font_size=10, fill=TEXT_DIM, anchor="start")
+            if x + len(label) * 6 <= W - 16:
+                svg += text_el(x, offset_y - 8, label,
+                               font_size=10, fill=TEXT_DIM, anchor="start")
             last_month = m
 
     # Draw the contribution cells
