@@ -71,7 +71,7 @@ def generate_contributions(username, output_path, contribs=None):
     grid_w = grid_cols * CELL_SIZE
     grid_h = GRID_ROWS * CELL_SIZE
     W = grid_w + label_w + 30
-    H = grid_h + title_h + legend_h + 35
+    H = grid_h + title_h + legend_h + 44
 
     svg = svg_header(W, H)
     svg += card_bg(W, H, stroke=None)
@@ -84,7 +84,7 @@ def generate_contributions(username, output_path, contribs=None):
     # Day-of-week labels (Mon, Wed, Fri)
     day_labels = {1: "Mon", 3: "Wed", 5: "Fri"}
     offset_x = label_w + 10
-    offset_y = title_h + 5
+    offset_y = title_h + 14
 
     for row_idx, label in day_labels.items():
         y = offset_y + row_idx * CELL_SIZE + CELL / 2 + 4
@@ -143,7 +143,7 @@ def generate_contributions(username, output_path, contribs=None):
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"  ✓ Contribution heatmap → {output_path} ({total} contributions, {active_days} active days)")
+    print(f"  Contribution heatmap -> {output_path} ({total} contributions, {active_days} active days)")
 
 
 if __name__ == "__main__":

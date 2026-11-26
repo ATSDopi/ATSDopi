@@ -18,7 +18,7 @@ W = 900
 H = 320
 PADDING_L = 60
 PADDING_R = 30
-PADDING_T = 50
+PADDING_T = 62
 PADDING_B = 50
 CHART_W = W - PADDING_L - PADDING_R
 CHART_H = H - PADDING_T - PADDING_B
@@ -112,7 +112,7 @@ def generate_activity_graph(username, output_path, contribs=None):
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"  ✓ Activity graph → {output_path} (total={total}, avg={avg:.1f}, max={max_day})")
+    print(f"  Activity graph -> {output_path} (total={total}, avg={avg:.1f}, max={max_day})")
 
 
 if __name__ == "__main__":
