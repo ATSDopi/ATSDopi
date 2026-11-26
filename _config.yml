@@ -6,3 +6,8 @@ baseurl: "/ATSDopi"
 show_downloads: false
 plugins:
   - jekyll-sitemap
+exclude:
+  - tools/
+  - assets/projects-fragment.html
+  - assets/socials-fragment.html
+  - LICENSE

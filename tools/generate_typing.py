@@ -73,8 +73,11 @@ def generate_typing(phrases, output_path):
         # ── Mask: reveals text from left to right ──
         # x stays at left_x, width grows from 0 → tw (typing), then tw → 0 (erasing)
         mask_id = f"mask{i}"
+        # Static attributes show phrase 1 fully typed — SMIL overrides them
+        # when it runs, renderers without SMIL still see text (never blank).
+        static_w = f"{tw:.1f}" if i == 0 else "0"
         svg += f'  <mask id="{mask_id}">\n'
-        svg += f'    <rect x="{left_x:.1f}" y="0" width="0" height="{HEIGHT}" fill="white">\n'
+        svg += f'    <rect x="{left_x:.1f}" y="0" width="{static_w}" height="{HEIGHT}" fill="white">\n'
 
         mask_values = []
         mask_keytimes = []
@@ -83,9 +86,14 @@ def generate_typing(phrases, output_path):
             mask_values.append(f"{w:.1f}")
             mask_keytimes.append(f"{t / total_dur:.6f}")
 
-        add_point(0, 0)
-        add_point(s, 0)
-        add_point(te, tw)      # fully typed
+        if i == 0:
+            # First phrase starts fully typed so static renderers
+            # (no SMIL) never show an empty frame
+            add_point(0, tw)
+        else:
+            add_point(0, 0)
+            add_point(s, 0)
+            add_point(te, tw)  # fully typed
         add_point(he, tw)      # still full during hold
         add_point(ee, 0)       # erased
         add_point(total_dur, 0)
@@ -98,9 +106,10 @@ def generate_typing(phrases, output_path):
         svg += f'  </mask>\n'
 
         # ── Text: centered, masked ──
+        static_op = "1" if i == 0 else "0"
         svg += f'  <text x="{CENTER_X}" y="{Y_TEXT}" font-size="{FONT_SIZE}" '
         svg += f'font-family="{FONT_FAMILY}" font-weight="600" fill="{PURPLE}" '
-        svg += f'text-anchor="middle" mask="url(#{mask_id})" opacity="0">\n'
+        svg += f'text-anchor="middle" mask="url(#{mask_id})" opacity="{static_op}">\n'
         svg += f'    {pt["text"]}\n'
 
         # Opacity safety net
@@ -111,9 +120,12 @@ def generate_typing(phrases, output_path):
             op_values.append(f"{v}")
             op_keytimes.append(f"{t / total_dur:.6f}")
 
-        add_op(0, 0)
-        add_op(s, 0)
-        add_op(s + 0.01, 1)
+        if i == 0:
+            add_op(0, 1)
+        else:
+            add_op(0, 0)
+            add_op(s, 0)
+            add_op(s + 0.01, 1)
         add_op(ee - 0.01, 1)
         add_op(ee, 0)
         add_op(total_dur, 0)
@@ -135,11 +147,13 @@ def generate_typing(phrases, output_path):
         cursor_values.append(f"{x:.1f}")
         cursor_keytimes.append(f"{t / total_dur:.6f}")
 
-    add_cursor(0, CENTER_X)
+    # Cursor starts at the end of phrase 1 — it is pre-typed at frame 0
+    add_cursor(0, phrase_timings[0]["right_x"])
 
-    for pt in phrase_timings:
-        # At start of phrase: cursor at left edge
-        add_cursor(pt["start"], pt["left_x"])
+    for i, pt in enumerate(phrase_timings):
+        # At start of phrase: cursor at left edge (right edge for the
+        # pre-typed first phrase)
+        add_cursor(pt["start"], pt["right_x"] if i == 0 else pt["left_x"])
         # After typing: cursor at right edge
         add_cursor(pt["type_end"], pt["right_x"])
         # During hold: stays at right edge
@@ -154,7 +168,8 @@ def generate_typing(phrases, output_path):
     cursor_y_top = Y_TEXT - FONT_SIZE + 4
     cursor_height = FONT_SIZE
 
-    svg += f'  <rect x="{CENTER_X}" y="{cursor_y_top}" width="3" height="{cursor_height}" '
+    cursor_static_x = phrase_timings[0]["right_x"]
+    svg += f'  <rect x="{cursor_static_x}" y="{cursor_y_top}" width="3" height="{cursor_height}" '
     svg += f'fill="{CYAN}" rx="1">\n'
     svg += f'    <animate attributeName="x" dur="{total_dur:.2f}s" '
     svg += f'begin="0s" repeatCount="indefinite" '

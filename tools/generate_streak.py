@@ -91,7 +91,7 @@ def generate_streak(username, output_path, contribs=None):
     svg += card_bg(W, H)
 
     # Title
-    svg += text_el(W // 2, 32, "🔥 Streak Stats", font_size=16,
+    svg += text_el(W // 2, 32, "Streak Stats", font_size=16,
                    fill=ORANGE, weight="bold", anchor="middle")
     svg += f'  <rect x="{W // 2 - 90}" y="40" width="180" height="2" rx="1" fill="url(#gradHeader)" opacity="0.6"/>\n'
 

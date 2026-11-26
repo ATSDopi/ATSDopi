@@ -293,6 +293,16 @@ def compute_stats(username):
         "created_at": user.get("created_at", ""),
         "languages": lang_counts,
         "contributions": contribs,
+        "repos": [
+            {
+                "name": r["name"],
+                "url": r["html_url"],
+                "pushed_at": r.get("pushed_at"),
+                "updated_at": r.get("updated_at"),
+            }
+            for r in repos
+            if not r.get("fork")
+        ],
     }
 
 

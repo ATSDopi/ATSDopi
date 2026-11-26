@@ -45,7 +45,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # Rebase first — another run may have pushed while we generated
           git pull --rebase --autostash
-          git add assets/
+          git add assets/ README.md
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else

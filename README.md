@@ -27,7 +27,7 @@ class ATSDopi:
         self.role = "Cybersecurity Student"
         self.current_project = "CTF Toolbox"
         self.languages = ["Python", "TypeScript", "JavaScript", "C", "C++",
-                          "C#", "Java", "PHP", "Rust", "Swift", "Kotlin"]
+                          "C#", "Java", "PHP", "Rust", "Swift", "Kotlin", "Go"]
         self.web = ["HTML5", "React", "Next.js", "Node.js", "Electron",
                     "WordPress", "Android"]
         self.databases = ["MySQL", "PostgreSQL", "Firebase"]
@@ -60,14 +60,17 @@ class ATSDopi:
 
 ### 📂 Featured Projects
 
-<!-- Cards mirror the pinned repos — regenerated daily.
-     Matching <a><img> snippet: assets/projects-fragment.html -->
+<!-- Cards mirror the pinned repos (top-starred repos fill any empty slot)
+     — regenerated daily. Links below are auto-synced from
+     assets/projects-fragment.html by tools/update_readme.py. -->
 
 <div align="center">
+<!-- PROJECT_CARDS:START -->
   <a href="https://github.com/ATSDopi/Auto-Desk"><img src="./assets/project-0.svg" width="445" alt="Auto-Desk" /></a>
   <a href="https://github.com/ATSDopi/ATS-Mail-Sorter"><img src="./assets/project-1.svg" width="445" alt="ATS-Mail-Sorter" /></a>
   <a href="https://github.com/ATSDopi/TheStudentRepo"><img src="./assets/project-2.svg" width="445" alt="TheStudentRepo" /></a>
   <a href="https://github.com/ATSDopi/HeadSeaker"><img src="./assets/project-3.svg" width="445" alt="HeadSeaker" /></a>
+<!-- PROJECT_CARDS:END -->
 </div>
 
 <br/>
@@ -143,14 +146,17 @@ class ATSDopi:
 > 🌐 **Central hub**: [guns.lol/atsdopi](https://guns.lol/atsdopi) — all my links in one place
 
 <div align="center">
+<!-- SOCIALS:START -->
   <a href="https://guns.lol/atsdopi"><img src="./assets/social-guns.svg" height="56" alt="guns.lol" /></a>
-  <a href="https://discord.com/users/704717426729943070"><img src="./assets/social-discord.svg" height="56" alt="Discord" /></a>
+  <a href="https://discord.com/users/1562534388577734808"><img src="./assets/social-discord.svg" height="56" alt="Discord" /></a>
+  <a href="https://ctftime.org/team/452423"><img src="./assets/social-ctftime.svg" height="56" alt="CTFtime" /></a>
   <a href="https://instagram.com/0._ats_.0"><img src="./assets/social-instagram.svg" height="56" alt="Instagram" /></a>
   <a href="https://www.frostapp.net/"><img src="./assets/social-frost.svg" height="56" alt="Frost" /></a>
   <a href="https://www.atspro.fr/"><img src="./assets/social-atspro.svg" height="56" alt="ATS Pro" /></a>
   <a href="mailto:atsprofessional67@gmail.com"><img src="./assets/social-email.svg" height="56" alt="Email" /></a>
   <a href="https://www.potiongang.fr/"><img src="./assets/social-potion.svg" height="56" alt="Potion Gang" /></a>
-  <a href="https://buymeacoffee.com/ats_dopi"><img src="./assets/social-buymeacoffee.svg" height="56" alt="Buy Me a Coffee" /></a>
+  <a href="https://buymeacoffee.com/ats_dopi"><img src="./assets/social-buymeacoffee.svg" height="56" alt="Buy Me Coffee" /></a>
+<!-- SOCIALS:END -->
 </div>
 
 <br/>
@@ -192,6 +198,12 @@ The `tools/` directory contains Python scripts that:
 | `pacman.svg` | contribution calendar | `generate_pacman.py` |
 | `feed.svg` | public events | `generate_feed.py` |
 | `project-*.svg` | pinned repos | `generate_projects.py` |
+| `social-ctftime.svg` | static (flag glyph) | `generate_socials.py` |
+
+`update_readme.py` splices the generated link fragments
+(`assets/projects-fragment.html`, `assets/socials-fragment.html`) into the
+`<!-- *_CARDS:START -->` / `<!-- SOCIALS:START -->` markers of this README —
+the `<a>` hrefs stay in sync with the cards automatically.
 
 To regenerate manually:
 

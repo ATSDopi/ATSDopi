@@ -83,8 +83,12 @@ def _describe(ev, username):
     return None
 
 
-def generate_feed(username, output_path, max_rows=MAX_ROWS):
-    """Generate the recent-activity card SVG."""
+def generate_feed(username, output_path, max_rows=MAX_ROWS, recent_repos=None):
+    """Generate the recent-activity card SVG.
+
+    When public events run short of `max_rows`, remaining rows are filled
+    with the most recently pushed repos so the card never looks empty.
+    """
     print(f"  Fetching public events for {username}...")
     try:
         events = get_public_events(username)
@@ -94,6 +98,7 @@ def generate_feed(username, output_path, max_rows=MAX_ROWS):
 
     # Dedupe on (type, repo) — a burst of PR events collapses to one row
     seen = set()
+    seen_repos = set()
     rows = []
     for ev in events:
         key = (ev.get("type"), ev.get("repo", {}).get("name"))
@@ -105,8 +110,19 @@ def generate_feed(username, output_path, max_rows=MAX_ROWS):
             continue
         text, color = described
         rows.append((text, color, time_ago(ev.get("created_at"))))
+        seen_repos.add(_short_repo(ev.get("repo", {}).get("name", ""), username))
         if len(rows) >= max_rows:
             break
+
+    # Fill spare rows with recently pushed repos (dimmed — real data, different signal)
+    if len(rows) < max_rows and recent_repos:
+        fresh = sorted(
+            (r for r in recent_repos if r.get("pushed_at") and r["name"] not in seen_repos),
+            key=lambda r: r["pushed_at"],
+            reverse=True,
+        )
+        for r in fresh[: max_rows - len(rows)]:
+            rows.append((f"Working on {r['name']}", TEXT_DIM, time_ago(r["pushed_at"])))
 
     svg = svg_header(W, H)
     svg += card_bg(W, H)

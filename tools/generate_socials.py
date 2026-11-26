@@ -24,7 +24,8 @@ with open(_ICONS_FILE, "r", encoding="utf-8") as f:
 # icon_source: "simpleicons" (real logo) or "custom" (styled initial)
 SOCIALS = [
     ("guns.lol",      "#a333d8", "https://guns.lol/atsdopi",                          "custom",      "social-guns.svg"),
-    ("Discord",       "#5865f2", "https://discord.com/users/704717426729943070",      "simpleicons",  "social-discord.svg"),
+    ("Discord",       "#5865f2", "https://discord.com/users/1562534388577734808",     "simpleicons",  "social-discord.svg"),
+    ("CTFtime",       "#d63c3f", "https://ctftime.org/team/452423",                    "simpleicons",  "social-ctftime.svg"),
     ("Instagram",     "#e4405f", "https://instagram.com/0._ats_.0",                    "simpleicons",  "social-instagram.svg"),
     ("Frost",         "#00b4d8", "https://www.frostapp.net/",                          "custom",      "social-frost.svg"),
     ("ATS Pro",       "#7287fd", "https://www.atspro.fr/",                             "custom",      "social-atspro.svg"),
@@ -98,13 +99,18 @@ def _generate_badge(name, color, url, icon_source, output_path):
 
 
 def generate_all_socials(assets_dir):
-    """Generate all individual social badge SVGs."""
+    """Generate all individual social badge SVGs + the README link fragment."""
+    links = []
     for name, color, url, icon_source, filename in SOCIALS:
         path = os.path.join(assets_dir, filename)
         _generate_badge(name, color, url, icon_source, path)
+        links.append(f'  <a href="{url}"><img src="./assets/{filename}" height="56" alt="{name}" /></a>')
         print(f"  ✓ {name:16s} → assets/{filename}")
 
-    # Also return the list for README generation
+    fragment = os.path.join(assets_dir, "socials-fragment.html")
+    with open(fragment, "w", encoding="utf-8") as f:
+        f.write("\n".join(links) + "\n")
+
     return SOCIALS
 
 

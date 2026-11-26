@@ -32,6 +32,7 @@ from generate_socials import generate_all_socials
 from generate_projects import generate_projects
 from generate_feed import generate_feed
 from generate_quote import generate_quote
+from update_readme import update_readme
 from github_client import compute_stats, get_contributions
 
 
@@ -74,7 +75,7 @@ def main():
 
     print("[3] Skills badges...")
     _step("skills", lambda: generate_skills([
-        ["Python", "TypeScript", "JavaScript", "C", "C++", "C#", "Java", "PHP", "Rust", "Swift", "Kotlin"],
+        ["Python", "TypeScript", "JavaScript", "C", "C++", "C#", "Java", "PHP", "Rust", "Swift", "Kotlin", "Go"],
         ["HTML5", "React", "Next.js", "Node.js", "Electron", "WordPress", "Android"],
         ["MySQL", "PostgreSQL", "Firebase", "Docker", "PowerShell"],
         ["Figma", "Photoshop", "Lightroom", "After Effects", "Arduino"],
@@ -132,7 +133,12 @@ def main():
         _step("pacman", lambda: generate_pacman(username, out("pacman.svg"), contribs), failures)
 
     print("[14] Recent activity feed...")
-    _step("feed", lambda: generate_feed(username, out("feed.svg")), failures)
+    _step("feed", lambda: generate_feed(
+        username, out("feed.svg"),
+        recent_repos=stats.get("repos") if stats else None), failures)
+
+    print("[15] Sync README link sections...")
+    _step("readme", lambda: update_readme(), failures)
 
     print(f"\n{'=' * 60}")
     if failures:
