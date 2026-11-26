@@ -37,7 +37,7 @@ class ATSDopi:
         self.interests = ["CTF", "OSINT", "Pentest", "Reverse Engineering",
                           "LLM", "Automation"]
         self.location = "France"
-        self.hub = "https://guns.lol/atsdopi"
+        self.hub = "https://guns.lol/initial"
         self.profile_readme = "100% self-generated — zero external services"
 ```
 
@@ -144,11 +144,11 @@ class ATSDopi:
 
 ### 🔗 &nbsp;Find Me Everywhere
 
-> 🌐 **Central hub**: [guns.lol/atsdopi](https://guns.lol/atsdopi) — all my links in one place
+> 🌐 **Central hub**: [guns.lol/initial](https://guns.lol/initial) — all my links in one place
 
 <div align="center">
 <!-- SOCIALS:START -->
-  <a href="https://guns.lol/atsdopi"><img src="./assets/social-guns.svg" height="56" alt="guns.lol" /></a>
+  <a href="https://guns.lol/initial"><img src="./assets/social-guns.svg" height="56" alt="guns.lol" /></a>
   <a href="https://discord.com/users/1562534388577734808"><img src="./assets/social-discord.svg" height="56" alt="Discord" /></a>
   <a href="https://ctftime.org/team/452423"><img src="./assets/social-ctftime.svg" height="56" alt="CTFtime" /></a>
   <a href="https://instagram.com/0._ats_.0"><img src="./assets/social-instagram.svg" height="56" alt="Instagram" /></a>

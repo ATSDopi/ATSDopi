@@ -23,7 +23,7 @@ with open(_ICONS_FILE, "r", encoding="utf-8") as f:
 # (display_name, color, url, icon_source, filename)
 # icon_source: "simpleicons" (real logo) or "custom" (styled initial)
 SOCIALS = [
-    ("guns.lol",      "#a333d8", "https://guns.lol/atsdopi",                          "custom",      "social-guns.svg"),
+    ("guns.lol",      "#a333d8", "https://guns.lol/initial",                          "custom",      "social-guns.svg"),
     ("Discord",       "#5865f2", "https://discord.com/users/1562534388577734808",     "simpleicons",  "social-discord.svg"),
     ("CTFtime",       "#d63c3f", "https://ctftime.org/team/452423",                    "simpleicons",  "social-ctftime.svg"),
     ("Instagram",     "#e4405f", "https://instagram.com/0._ats_.0",                    "simpleicons",  "social-instagram.svg"),
@@ -105,7 +105,7 @@ def generate_all_socials(assets_dir):
         path = os.path.join(assets_dir, filename)
         _generate_badge(name, color, url, icon_source, path)
         links.append(f'  <a href="{url}"><img src="./assets/{filename}" height="56" alt="{name}" /></a>')
-        print(f"  ✓ {name:16s} → assets/{filename}")
+        print(f"  ok {name:16s} -> assets/{filename}")
 
     fragment = os.path.join(assets_dir, "socials-fragment.html")
     with open(fragment, "w", encoding="utf-8") as f:

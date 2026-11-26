@@ -53,7 +53,7 @@ def update_readme(root=ROOT):
     if changed:
         with open(readme_path, "w", encoding="utf-8") as f:
             f.write(readme)
-        print("  ✓ README.md updated from generated fragments")
+        print("  ok README.md updated from generated fragments")
     else:
         print("  - README.md already up to date")
     return changed
